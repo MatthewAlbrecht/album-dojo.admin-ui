@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react'
 
-export default class Premium extends Component {
-  render() {
-    return (
-      <>
-        <h1>Premium Page</h1>
-      </>
-    );
-  }
+const Premium = () => {
+  return (
+    <>
+      <h1>Premium Page</h1>
+    </>
+  )
 }
+
+export default Premium
