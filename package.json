@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-components": "^3.1.5",
     "@apollo/react-hooks": "^3.1.5",
     "animejs": "^3.2.0",
     "apollo-boost": "^0.4.9",
     "classnames": "^2.2.6",
     "graphql": "^15.0.0",
+    "graphql-request": "^1.8.2",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
@@ -20,7 +23,7 @@
     "throttle-debounce": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=1333 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
