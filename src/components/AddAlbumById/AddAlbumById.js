@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { addAlbumBySpotifyId } from 'actions/albums'
+import { addAlbumBySpotifyId } from 'actions/spotify'
 import Txt from 'components/Txt/Txt'
 import Btn from 'components/Btn/Btn'
 import TextInput from 'components/TextInput/TextInput'
@@ -12,10 +12,10 @@ import AlbumCardSimple from 'components/AlbumCardSimple/AlbumCardSimple'
 export default function AddAlbumById() {
   const dispatch = useDispatch()
   const { newAlbumById, newAlbumByIdError, newAlbumByIdLoading } = useSelector(
-    ({ albums }) => ({
-      newAlbumById: albums.newAlbumById,
-      newAlbumByIdError: albums.newAlbumByIdError,
-      newAlbumByIdLoading: albums.newAlbumByIdLoading,
+    ({ spotify }) => ({
+      newAlbumById: spotify.newAlbumById,
+      newAlbumByIdError: spotify.newAlbumByIdError,
+      newAlbumByIdLoading: spotify.newAlbumByIdLoading,
     })
   )
   const handleAlbumSubmit = event => {

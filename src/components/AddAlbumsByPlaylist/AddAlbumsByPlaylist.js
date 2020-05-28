@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { addAlbumsByPlaylistId } from 'actions/albums'
+import { addAlbumsByPlaylistId } from 'actions/spotify'
 import Txt from 'components/Txt/Txt'
 import Btn from 'components/Btn/Btn'
 import TextInput from 'components/TextInput/TextInput'
@@ -15,10 +15,10 @@ export default function AddAlbumByPlaylist() {
     newAlbumsByPlaylist,
     newAlbumsByPlaylistError,
     newAlbumsByPlaylistLoading,
-  } = useSelector(({ albums }) => ({
-    newAlbumsByPlaylist: albums.newAlbumsByPlaylist,
-    newAlbumsByPlaylistError: albums.newAlbumsByPlaylistError,
-    newAlbumsByPlaylistLoading: albums.newAlbumsByPlaylistLoading,
+  } = useSelector(({ spotify }) => ({
+    newAlbumsByPlaylist: spotify.newAlbumsByPlaylist,
+    newAlbumsByPlaylistError: spotify.newAlbumsByPlaylistError,
+    newAlbumsByPlaylistLoading: spotify.newAlbumsByPlaylistLoading,
   }))
   const handlePlaylistSubmit = event => {
     event.preventDefault()
