@@ -13,7 +13,7 @@
 // TXT SIZES
 // ------------------------------------
 
-$text-sizes: 10 12 14 16 18 20 24 26 32 38 40 50 80;
+$text-sizes: 10 12 14 16 18 20 24 26 28 32 38 40 50 80;
 
 @mixin createTextSizes($resolution: '') {
   @each $text-size in $text-sizes {
@@ -58,6 +58,10 @@ $text-sizes: 10 12 14 16 18 20 24 26 32 38 40 50 80;
   font-weight: 300;
 }
 
+.txt_semibold {
+  font-weight: 500;
+}
+
 .txt_bold {
   font-weight: 600;
 }
@@ -91,12 +95,16 @@ $text-sizes: 10 12 14 16 18 20 24 26 32 38 40 50 80;
 // ------------------------------------
 
 .txt_space1 {
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
 }
 
 // ------------------------------------
 // TXT COLORS
 // ------------------------------------
+
+.txt_colorDefaultCopy {
+  color: $COLOR_DEFAULT_COPY;
+}
 
 .txt_colorLightest {
   color: $COLOR_LIGHTEST;

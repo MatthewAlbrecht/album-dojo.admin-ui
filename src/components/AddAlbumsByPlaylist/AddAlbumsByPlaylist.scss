@@ -1,0 +1,26 @@
+/* ---------------------------------------------
+ Add Album By Id
+--------------------------------------------- */
+
+.newAlbumById {
+  align-items: center;
+  border-radius: $BORDER_RADIUS;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  display: flex;
+  padding: rhythm(1);
+  transition: box-shadow 0.25s $EASEOUT_QUAD;
+
+  &:hover {
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  }
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

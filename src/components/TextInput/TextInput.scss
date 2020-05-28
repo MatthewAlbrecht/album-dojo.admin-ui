@@ -1,0 +1,31 @@
+/* ---------------------------------------------
+ Text Input
+--------------------------------------------- */
+
+.textInput {
+  display: flex;
+  flex-direction: column;
+  width: 26rem;
+}
+
+.textInput-label {
+  padding-bottom: 0.4rem;
+  padding-left: 0.4rem;
+}
+
+.textInput-input {
+  border: 0.1rem solid $COLOR_GREY_LIGHT;
+  padding: 1rem rhythm(2);
+  font-size: 1.6rem;
+  border-radius: $BORDER_RADIUS;
+  font-family: $FONT_FAMILY_PRIMARY;
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

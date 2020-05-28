@@ -36,7 +36,7 @@
 }
 
 .tier_underNav {
-  padding-top: rhythm(10);
+  padding-top: rhythm(3);
 }
 
 @include breakpoint(breakpoint_size('md')) {
@@ -51,7 +51,7 @@
   }
 
   .tier_underNav {
-    padding-top: 15rem;
+    padding-top: rhythm(5);
   }
 }
 
@@ -69,6 +69,6 @@
   }
 
   .tier_underNav {
-    padding-top: 17rem;
+    padding-top: rhythm(7);
   }
 }

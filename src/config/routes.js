@@ -1,16 +1,29 @@
-import Home from 'pages/Home/Home';
-import Login from 'pages/Login/Login';
+import Home from 'pages/Home/Home'
+import Login from 'pages/Login/Login'
+import Spotify from 'pages/Spotify/Spotify'
+import Albums from 'pages/Albums/Albums'
 
-const routes = [
+export const publicRoutes = [
   {
-    path: "/",
+    path: '/login',
+    component: Login,
+  },
+]
+
+export const privateRoutes = [
+  {
+    path: '/',
     component: Home,
     exact: true,
   },
   {
-    path: "/login",
-    component: Login,
+    path: '/spotify',
+    component: Spotify,
+    exact: true,
   },
-];
-
-export default routes;
+  {
+    path: '/albums',
+    component: Albums,
+    exact: true,
+  },
+]

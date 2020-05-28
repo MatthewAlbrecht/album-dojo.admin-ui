@@ -1,3 +1,30 @@
 /* ---------------------------------------------
  Header
 --------------------------------------------- */
+
+.header {
+  background: #0032a2;
+  height: 5.6rem;
+  padding: 0 1.6rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $Z_HEADER;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+}
+
+@include breakpoint(breakpoint_size('md')) {
+  .header {
+    padding: 0 rhythm(3);
+  }
+}
+
+@include breakpoint(breakpoint_size('lg')) {
+}

@@ -1,18 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 export default function Hr(props) {
   function getClasses() {
-    return props.classes && props.classes.split(" ").map(hrClass => `hr_${hrClass}`);
+    return (
+      props.classes && props.classes.split(' ').map(hrClass => `hr_${hrClass}`)
+    )
   }
 
   function getSizeClasses() {
-    return props.size && props.size.split(" ").map(sizeClass => `hr_${sizeClass}`);
+    return (
+      props.size && props.size.split(' ').map(sizeClass => `hr_${sizeClass}`)
+    )
   }
 
   function getColorClasses() {
-    return props.color && props.color.split(" ").map(colorClass => `hr_color${colorClass}`);
+    return (
+      props.color &&
+      props.color.split(' ').map(colorClass => `hr_color${colorClass}`)
+    )
   }
 
   function getClassName() {
@@ -21,19 +28,15 @@ export default function Hr(props) {
       getClasses(),
       getSizeClasses(),
       getColorClasses(),
-      props.className,
-    );
+      props.className
+    )
   }
 
-  return (
-    <div className={getClassName()}>
-      {props.children}
-    </div>
-  );
+  return <div className={getClassName()}>{props.children}</div>
 }
 
 Hr.propTypes = {
-  'classes': PropTypes.string,
-  'size': PropTypes.string,
-  'color': PropTypes.string,
-};
+  classes: PropTypes.string,
+  size: PropTypes.string,
+  color: PropTypes.string,
+}

@@ -20,13 +20,21 @@
   width: 13.3rem;
 }
 
+.img_150 {
+  width: 15rem;
+}
+
 .img_177 {
   width: 17.7rem;
 }
 
+.img_rounded {
+  border-radius: $BORDER_RADIUS;
+}
+
 .img_nudgeDown1 {
   position: relative;
-  top: .8rem;
+  top: 0.8rem;
 }
 
 @include breakpoint(breakpoint_size('md')) {

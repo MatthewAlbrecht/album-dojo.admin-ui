@@ -1,0 +1,19 @@
+/* ---------------------------------------------
+ Component
+--------------------------------------------- */
+
+.loginOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

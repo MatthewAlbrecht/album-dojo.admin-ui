@@ -1,0 +1,17 @@
+/* ---------------------------------------------
+ Private Layout
+--------------------------------------------- */
+
+.view {
+  margin-left: rhythm(30);
+  margin-top: rhythm(7);
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

@@ -1,0 +1,23 @@
+/* ---------------------------------------------
+ Shelf
+--------------------------------------------- */
+
+.shelf {
+  background: $COLOR_GREY_SHELF;
+  position: fixed;
+  top: rhythm(7);
+  bottom: 0;
+  width: rhythm(30);
+  left: 0;
+  border-right: solid 0.1rem $COLOR_GREY_LIGHTEST;
+  padding: rhythm(5);
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

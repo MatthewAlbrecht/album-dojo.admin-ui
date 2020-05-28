@@ -1,35 +1,59 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import routes from 'config/routes';
-import Footer from 'components/Footer/Footer';
-import Header from 'components/Header/Header';
-import TabListener from 'components/TabListener/TabListener';
-import ScrollToTop from 'components/ScrollToTop/ScrollToTop';
+import React from 'react'
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { publicRoutes, privateRoutes } from 'config/routes'
+import Footer from 'components/Footer/Footer'
+import Header from 'components/Header/Header'
+import TabListener from 'components/TabListener/TabListener'
+import ScrollToTop from 'components/ScrollToTop/ScrollToTop'
+import PrivateLayout from 'layouts/PrivateLayout/PrivateLayout'
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div>
-          <Header/>
-          <main>
-            {routes.map((route, index) => (
-              <Route
-                key={index}
-                exact={route.exact}
-                path={route.path}
-                component={route.component}
-              />
-            ))}
-          </main>
-          <Footer/>
-          <TabListener/>
-          <ScrollToTop/>
-        </div>
-      </Router>
-    );
-  }
+export default function App() {
+  return (
+    <Router>
+      <div>
+        <Header />
+        <main>
+          {publicRoutes.map((route, index) => (
+            <Route
+              key={index}
+              exact={route.exact}
+              path={route.path}
+              component={route.component}
+            />
+          ))}
+          {privateRoutes.map((route, index) => (
+            <ProtectedRoute
+              key={index}
+              exact={route.exact}
+              path={route.path}
+              component={route.component}
+            />
+          ))}
+        </main>
+        <Footer />
+        <TabListener />
+        <ScrollToTop />
+      </div>
+    </Router>
+  )
 }
 
+let ProtectedRoute = ({ token, index, exact, path, component }) => {
+  return token ? (
+    <PrivateLayout
+      key={index}
+      exact={exact}
+      path={path}
+      component={component}
+    />
+  ) : (
+    <Redirect to="/login"></Redirect>
+  )
+}
 
-export default App;
+const mapStateToProps = ({ session }) => ({
+  token: session.token,
+})
+
+ProtectedRoute = connect(mapStateToProps)(ProtectedRoute)

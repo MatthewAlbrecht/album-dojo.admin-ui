@@ -1,57 +1,56 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import images from 'utils/images';
+import React, { Component } from 'react'
+import classnames from 'classnames'
+import images from 'utils/images'
 
 export default class Img extends Component {
   get images() {
-    return images[this.props.name] || {};
+    return images[this.props.name] || {}
   }
 
   get sizeClasses() {
-    return this.props.size && this.props.size.split(' ').map(size => `img_${size}`);
+    return (
+      this.props.size && this.props.size.split(' ').map(size => `img_${size}`)
+    )
   }
 
   get alignmentClasses() {
-    return this.props.align && this.props.align.split(' ').map(alignment => `img_${alignment}`);
+    return (
+      this.props.align &&
+      this.props.align.split(' ').map(alignment => `img_${alignment}`)
+    )
   }
 
   get className() {
+    const { rounded, className } = this.props
+
     return classnames(
       'img',
       this.sizeClasses,
       this.alignmentClasses,
-      this.props.className
-    );
+      className,
+      { img_rounded: rounded }
+    )
   }
 
   get src() {
-    const {
-      src,
-      src2x,
-      src3x,
-    } = this.images;
+    const { src, src2x, src3x } = this.images
 
-    return src || src2x || src3x;
+    return src || src2x || src3x || this.props.srcUrl
   }
 
   get srcSet() {
-    let srcSet = '';
-    const {
-      src2x,
-      src3x,
-    } = this.images;
+    let srcSet = ''
+    const { src2x, src3x } = this.images
 
-    srcSet += src2x ? `${src2x} 2x` : '';
-    srcSet += (src2x && src3x) ? ', ' : '';
-    srcSet += src3x ? `${src3x} 3x` : '';
+    srcSet += src2x ? `${src2x} 2x` : ''
+    srcSet += src2x && src3x ? ', ' : ''
+    srcSet += src3x ? `${src3x} 3x` : ''
 
-    return srcSet;
+    return srcSet
   }
 
   render() {
-    const {
-      alt,
-    } = this.props;
+    const { alt } = this.props
 
     return (
       <img
@@ -60,6 +59,6 @@ export default class Img extends Component {
         alt={alt}
         className={this.className}
       />
-    );
+    )
   }
 }

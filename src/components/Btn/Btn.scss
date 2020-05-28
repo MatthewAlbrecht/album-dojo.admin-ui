@@ -5,43 +5,45 @@
 --------------------------------------------- */
 
 .btn {
+  background: linear-gradient(90deg, #0032a2, #215dde);
+  border-radius: $BORDER_RADIUS;
+  color: $COLOR_LIGHTEST;
   display: inline-block;
   font-family: $FONT_FAMILY_PRIMARY;
-  text-transform: uppercase;
-  background-color: $COLOR_GREY_DARK;
-  color: $COLOR_LIGHTEST;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   line-height: 1.2;
   min-width: 12.8rem;
-  padding: 1.4rem rhythm(4) 1.5rem rhythm(4);
+  padding: 0.8rem rhythm(3) 0.9rem;
   text-align: center;
-  transition: background-color 0.3s $EASEOUT_QUAD;
-  width: 100%;
+  text-transform: uppercase;
+  transition: background-color 0.25s $EASEOUT_QUAD;
+  width: auto;
 
   &:active {
     background-color: $COLOR_GREY;
   }
 
   &:disabled {
-    background-color: $COLOR_GREY_LIGHTEST;
     cursor: unset;
   }
+}
+
+.btn_secondary {
+  background: $COLOR_LIGHTEST;
+  color: $COLOR_DEFAULT_COPY;
+}
+
+.btn_loading {
+  // DO SOME COOL STUFF HERE
 }
 
 .btn_full {
   width: 100% !important;
 }
 
-.btn_pill {
-  border-radius: rhythm(3);
-}
-
 @include breakpoint(breakpoint-size('md')) {
-  .btn {
-    width: auto;
-  }
 }
 
 @include breakpoint(breakpoint-size('lg')) {
