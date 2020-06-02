@@ -1,26 +1,30 @@
 import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
 
-export const addAlbumByIdMutation = print(gql`
-  mutation createAlbumById($album: AlbumInputTypeCreateById!) {
-    createAlbumById(album: $album) {
-      id
-      spotifyId
-      name
-      durationInMs
-      artists
-      images
-    }
-  }
-`)
-
-export const addAlbumsByPlaylistMutation = print(gql`
-  mutation createAlbumsByPlaylist($album: AlbumInputTypeCreateByPlaylistId!) {
-    createAlbumsByPlaylist(album: $album) {
-      id
-      name
-      artists
-      images
+export const getAlbums = print(gql`
+  query getAlbums(
+    $sort: sort!
+    $sortOrder: sortOrder!
+    $after: String
+    $searchTerm: String
+  ) {
+    album(
+      pageSize: 50
+      sort: $sort
+      sortOrder: $sortOrder
+      after: $after
+      searchTerm: $searchTerm
+    ) {
+      hasMore
+      cursor
+      totalCount
+      albums {
+        id
+        name
+        artists
+        images
+        spotifyId
+      }
     }
   }
 `)

@@ -5,6 +5,7 @@
 .view {
   margin-left: rhythm(30);
   margin-top: rhythm(7);
+  min-height: 100vh;
 }
 
 @include breakpoint(breakpoint-size(md)) {

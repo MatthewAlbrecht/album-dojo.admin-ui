@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Infinite from 'react-infinite'
 
 import { addAlbumsByPlaylistId } from 'actions/spotify'
 import Txt from 'components/Txt/Txt'
@@ -63,11 +64,26 @@ export default function AddAlbumByPlaylist() {
         </VList>
         {newAlbumsByPlaylist && (
           <Box classes="top3">
-            <VList classes="2">
+            <Infinite
+              className="vList vList-2"
+              elementHeight={126}
+              useWindowAsScrollContainer
+            >
               {newAlbumsByPlaylist.map(album => (
                 <AlbumCardSimple key={album.id} album={album} />
               ))}
-            </VList>
+            </Infinite>
+          </Box>
+        )}
+        {newAlbumsByPlaylist && !newAlbumsByPlaylist.length && (
+          <Box classes="top3">
+            <Txt
+              tag="p"
+              size="16"
+              color="DefaultCopy"
+              content="No New Albums Added"
+              classes="center"
+            />
           </Box>
         )}
       </form>

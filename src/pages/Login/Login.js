@@ -38,35 +38,37 @@ const Home = props => {
   }
 
   return (
-    <Container>
-      <Tier classes="underNav">
-        <div className="loginOptions">
-          <OauthPopup
-            url={`https://accounts.spotify.com/authorize?${qs.stringify(
-              SPOTIFY_QS
-            )}`}
-            onCode={handleSpotifyLogin}
-          >
-            <Btn pill content="Login with Spotify"></Btn>
-          </OauthPopup>
-          <Box classes="flats3">
-            <Txt tag="h3" size="16" color="DefaultCopy" content="- OR -" />
-          </Box>
-          <form onSubmit={onLoginFormSubmit} id="login-form">
-            <VList classes="2">
-              <TextInput name="email" label="Email" id="login-email" />
-              <TextInput
-                name="password"
-                label="Password"
-                type="password"
-                id="login-password"
-              />
-              <Btn type="submit" form="login-form" content="Login"></Btn>
-            </VList>
-          </form>
-        </div>
-      </Tier>
-    </Container>
+    <div className="loginPage">
+      <Container>
+        <Tier classes="underNav">
+          <div className="loginOptions">
+            <OauthPopup
+              url={`https://accounts.spotify.com/authorize?${qs.stringify(
+                SPOTIFY_QS
+              )}`}
+              onCode={handleSpotifyLogin}
+            >
+              <Btn pill content="Login with Spotify"></Btn>
+            </OauthPopup>
+            <Box classes="flats3">
+              <Txt tag="h3" size="16" color="DefaultCopy" content="- OR -" />
+            </Box>
+            <form onSubmit={onLoginFormSubmit} id="login-form">
+              <VList classes="2">
+                <TextInput name="email" label="Email" id="login-email" />
+                <TextInput
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="login-password"
+                />
+                <Btn type="submit" form="login-form" content="Login"></Btn>
+              </VList>
+            </form>
+          </div>
+        </Tier>
+      </Container>
+    </div>
   )
 }
 

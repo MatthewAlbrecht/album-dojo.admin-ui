@@ -1,19 +1,10 @@
 /* ---------------------------------------------
- Text Input
+ Select Dropdown
 --------------------------------------------- */
 
-.textInput {
-}
-
-.textInput-label {
-  padding-bottom: 0.4rem;
-  padding-left: 0.4rem;
-  display: block;
-}
-
-.textInput-input {
+.selectDropdown-select {
   border: 0.1rem solid $COLOR_GREY_LIGHT;
-  padding: 1rem rhythm(2);
+  padding: 0.9rem rhythm(2);
   font-size: 1.6rem;
   border-radius: $BORDER_RADIUS;
   font-family: $FONT_FAMILY_PRIMARY;
@@ -21,18 +12,6 @@
   &_iconActive {
     padding-right: rhythm(5);
   }
-}
-
-.textInput-inputContainer {
-  position: relative;
-  display: inline;
-}
-
-.textInput-icon {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: rhythm(2);
 }
 
 @include breakpoint(breakpoint-size(md)) {

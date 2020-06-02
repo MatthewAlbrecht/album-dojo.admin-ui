@@ -71,6 +71,10 @@ export const addAlbumsByPlaylistId = id => async (dispatch, getState) => {
     newTokens = await getNewTokens(session, dispatch)
   } catch (error) {
     console.log('error ==='.toUpperCase(), error)
+    return dispatch({
+      type: ADD_ALBUMS_BY_PLAYLIST_ERROR,
+      payload: error,
+    })
   }
 
   const { newApplicationAccessToken, newSpotifyAccessToken } = newTokens

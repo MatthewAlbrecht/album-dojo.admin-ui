@@ -1,14 +1,17 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { withRouter } from 'react-router'
 import { logoutUser } from 'actions/session'
 
 import Txt from 'components/Txt/Txt'
 import Btn from 'components/Btn/Btn'
 
-const Header = ({ token, logoutUser, history }) => {
+const Header = ({ history }) => {
+  const dispatch = useDispatch()
+  const { token } = useSelector(state => state.session)
+
   const handleLogoutClick = () => {
-    logoutUser()
+    dispatch(logoutUser())
     history.push('/login')
   }
   return (
@@ -29,14 +32,4 @@ const Header = ({ token, logoutUser, history }) => {
   )
 }
 
-const mapStateToProps = ({ session }) => ({
-  token: session.token,
-})
-
-const mapDispatchToProps = dispatch => {
-  return {
-    logoutUser: () => dispatch(logoutUser()),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
+export default withRouter(Header)

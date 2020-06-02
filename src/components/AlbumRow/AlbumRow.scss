@@ -1,0 +1,39 @@
+/* ---------------------------------------------
+ Album Row
+--------------------------------------------- */
+
+.albumRow {
+  height: rhythm(8);
+  padding: 0 rhythm(5);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  &:nth-child(odd) {
+    background-color: $COLOR_GREY_SHELF;
+  }
+}
+
+.albumRow-artist {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.albumRow-img {
+  flex-shrink: 0;
+}
+
+.albumRow-spotifyIcon:hover {
+  .primaryFill {
+    fill: $COLOR_SPOTIFY_GREEN;
+  }
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

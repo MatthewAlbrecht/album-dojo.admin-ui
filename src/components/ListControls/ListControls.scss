@@ -1,16 +1,10 @@
 /* ---------------------------------------------
- Component
+ List Controls
 --------------------------------------------- */
-
-.loginPage {
-  padding-top: rhythm(7);
-}
-
-.loginOptions {
+.listControls {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 @include breakpoint(breakpoint-size(md)) {

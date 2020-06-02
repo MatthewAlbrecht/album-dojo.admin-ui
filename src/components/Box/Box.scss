@@ -10,6 +10,10 @@ $box-sizes: 0 1 2 3 4 5 6 7 8 9 10;
   display: block;
 }
 
+.box_inlineBlock {
+  display: inline-block;
+}
+
 .box_75 {
   width: 75%;
 }
@@ -28,6 +32,10 @@ $box-sizes: 0 1 2 3 4 5 6 7 8 9 10;
 
 .box_bottom4_5 {
   padding-bottom: rhythm(4.5);
+}
+
+.box_left0_5 {
+  padding-left: rhythm(0.5);
 }
 
 @mixin createBoxDimensions($resolution: '') {

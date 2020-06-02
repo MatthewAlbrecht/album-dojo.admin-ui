@@ -1,14 +1,23 @@
-import React from 'react';
-import Info from './Icons/Info';
+import React from 'react'
+import Info from './Icons/Info'
+import Search from './Icons/Search'
+import Spotify from './Icons/Spotify'
+import classnames from 'classnames'
 
-export default function Icon(props) {
+export default function Icon({ className, type, classes }) {
+  function getClasses() {
+    return classes && classes.split(' ').map(imgClass => `icon_${imgClass}`)
+  }
+
   const iconMap = {
-    'Info': <Info/>,
-  };
+    Info: <Info />,
+    Search: <Search />,
+    Spotify: <Spotify />,
+  }
 
-  return (
-    <i className={props.className}>
-      {iconMap[props.type]}
-    </i>
-  );
+  function getClassName() {
+    return classnames('icon', className, getClasses())
+  }
+
+  return <i className={getClassName()}>{iconMap[type]}</i>
 }

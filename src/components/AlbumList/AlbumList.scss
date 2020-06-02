@@ -1,17 +1,6 @@
 /* ---------------------------------------------
- Component
+ Album List
 --------------------------------------------- */
-
-.loginPage {
-  padding-top: rhythm(7);
-}
-
-.loginOptions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
 
 @include breakpoint(breakpoint-size(md)) {
 }

@@ -26,11 +26,19 @@ export default function configureStore(initialState = {}) {
   }
 
   const deleteKeysFromSerializedState = state => {
-    delete state.albums.newAlbumById
-    delete state.albums.newAlbumByIdError
-    delete state.albums.newAlbumByIdLoading
-    delete state.albums.newAlbumsByPlaylistLoading
-    delete state.albums.newAlbumsByPlaylistError
+    delete state.spotify.newAlbumById
+    delete state.spotify.newAlbumByIdError
+    delete state.spotify.newAlbumByIdLoading
+    delete state.spotify.newAlbumsByPlaylist
+    delete state.spotify.newAlbumsByPlaylistLoading
+    delete state.spotify.newAlbumsByPlaylistError
+
+    state.albums.albums = []
+    state.albums.hasMore = true
+    delete state.albums.isInfiniteLoading
+    delete state.albums.cursor
+    delete state.albums.totalCount
+    delete state.albums.queryUpdated
     return state
   }
 
