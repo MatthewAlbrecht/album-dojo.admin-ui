@@ -3,7 +3,7 @@ import { print } from 'graphql/language/printer'
 
 export const getAlbums = print(gql`
   query getAlbums(
-    $sort: sort!
+    $sort: albumSort!
     $sortOrder: sortOrder!
     $after: String
     $searchTerm: String
