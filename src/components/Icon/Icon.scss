@@ -59,6 +59,13 @@
   }
 }
 
+.icon_ellipsis {
+  .primaryFill {
+    fill: $COLOR_GREY;
+    transition: fill 0.15s $EASEINOUT_QUAD;
+  }
+}
+
 @mixin createIconSize($size, $resolution: '') {
   .icon_ {
     &#{$size}#{$resolution} {

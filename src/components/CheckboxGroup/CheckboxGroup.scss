@@ -1,0 +1,60 @@
+/*------------------------------------
+  CheckboxGroup Styles
+------------------------------------*/
+
+.checkboxGroup--padTop {
+  padding-top: 1.6rem;
+}
+
+.checkboxGroup-label {
+  color: $COLOR_DEFAULT_COPY;
+  display: block;
+  font-size: 1.1rem;
+  padding: 0 0 1.6rem 0.4rem;
+  line-height: 1.2;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.checkboxGroup--disabled .checkboxGroup-label {
+  color: $COLOR_GREY_MEDIUM;
+}
+
+.checkboxGroup-content {
+  display: grid;
+  column-gap: 0.8rem;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 0.8rem;
+
+  &--5col {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  &--4col {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &--3col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &--2col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &--1col {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.checkboxGroup-warning {
+  font-size: 1.2rem;
+  color: darken($COLOR_RED_DARK, 10%);
+  font-weight: normal;
+  text-transform: initial;
+  padding-top: 0.4rem;
+
+  .checkboxGroup--disabled & {
+    color: grayscale(darken($COLOR_RED_DARK, 10%));
+  }
+}

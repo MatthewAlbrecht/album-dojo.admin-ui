@@ -7,7 +7,7 @@ import {
   SET_ALBUMS_HAS_MORE,
   SET_ALBUMS_TOTAL_COUNT,
   SET_ALBUMS_INFINITE_LOADING,
-} from 'types/actions'
+} from '../types/actions'
 
 const initialState = {
   albums: [],

@@ -6,7 +6,7 @@ import {
   onSearchUpdate,
   onSortUpdate,
   queryNextAlbums,
-} from 'actions/albums'
+} from 'state/actions/albums'
 import Container from 'components/Container/Container'
 import Tier from 'components/Tier/Tier'
 import Box from 'components/Box/Box'

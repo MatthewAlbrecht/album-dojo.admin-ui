@@ -3,11 +3,12 @@
 --------------------------------------------- */
 
 .albumRow {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
   height: rhythm(8);
   padding: 0 rhythm(5);
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+  position: relative;
 
   &:nth-child(odd) {
     background-color: $COLOR_GREY_SHELF;
@@ -26,6 +27,12 @@
 .albumRow-spotifyIcon:hover {
   .primaryFill {
     fill: $COLOR_SPOTIFY_GREEN;
+  }
+}
+
+.albumRow-menuIcon:hover {
+  .primaryFill {
+    fill: $COLOR_DEFAULT_COPY;
   }
 }
 

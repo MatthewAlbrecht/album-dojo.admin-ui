@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import rootReducer from 'reducers/rootReducer'
+import rootReducer from 'state/reducers/rootReducer'
 
 export default function configureStore(initialState = {}) {
   const saveToLocalStorage = state => {

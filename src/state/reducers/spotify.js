@@ -5,7 +5,7 @@ import {
   ADD_ALBUMS_BY_PLAYLIST,
   ADD_ALBUMS_BY_PLAYLIST_LOADING,
   ADD_ALBUMS_BY_PLAYLIST_ERROR,
-} from 'types/actions'
+} from '../types/actions'
 
 const initialState = {}
 

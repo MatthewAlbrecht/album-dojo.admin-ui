@@ -1,0 +1,113 @@
+/*------------------------------------
+  Checkbox Styles
+------------------------------------*/
+
+.checkbox {
+  position: relative;
+
+  &:hover:not(.checkbox--disabled)
+    .checkbox-input:not(:disabled)
+    ~ .checkbox-shadowInput {
+    background-color: darken($COLOR_GREY_LIGHTEST, 5%);
+  }
+
+  &:hover:not(.checkbox--disabled)
+    .checkbox-input:checked:not(:disabled)
+    ~ .checkbox-shadowInput {
+    background: linear-gradient(
+      90deg,
+      lighten($COLOR_BLUE_LIGHT, 5%),
+      lighten($COLOR_BLUE_DARK, 5%)
+    );
+  }
+}
+
+.checkbox-label {
+  color: $COLOR_DEFAULT_COPY;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 500;
+  height: 100%;
+  justify-content: space-between;
+  letter-spacing: 0.05rem;
+  padding: 0.8rem 0.8rem;
+  position: relative;
+  width: 100%;
+  word-break: break-word;
+  z-index: 2;
+
+  &--hasIcon {
+    padding: 0.8rem 0.8rem;
+    align-items: center;
+  }
+}
+
+.checkbox-input {
+  height: 0;
+  opacity: 0;
+  position: absolute;
+  width: 0;
+
+  &:disabled {
+    & ~ .checkbox-label {
+      cursor: default;
+    }
+
+    & ~ .checkbox-shadowInput {
+      background-color: grayscale($COLOR_GREY_LIGHTEST);
+    }
+
+    &:checked {
+      & ~ .checkbox-shadowInput {
+        background: linear-gradient(
+          90deg,
+          grayscale($COLOR_BLUE_LIGHT),
+          grayscale($COLOR_BLUE_DARK)
+        );
+
+        color: $COLOR_LIGHTEST;
+      }
+    }
+  }
+
+  &:checked {
+    & ~ .checkbox-shadowInput {
+      background: linear-gradient(90deg, $COLOR_BLUE_LIGHT, $COLOR_BLUE_DARK);
+
+      .checkbox--disabled & {
+        background: linear-gradient(
+          90deg,
+          grayscale($COLOR_BLUE_LIGHT),
+          grayscale($COLOR_BLUE_DARK)
+        );
+      }
+    }
+    & ~ .checkbox-label {
+      color: $COLOR_LIGHTEST;
+
+      .checkbox-icon {
+        .checkbox-iconUnchecked {
+          display: none;
+        }
+        .checkbox-iconChecked {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+.checkbox-shadowInput {
+  background-color: $COLOR_GREY_LIGHTEST;
+  border-radius: $BORDER_RADIUS;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  .checkbox--disabled & {
+    background-color: grayscale($COLOR_GREY_LIGHTEST);
+  }
+}

@@ -6,7 +6,7 @@ import { withRouter } from 'react-router'
 import { Redirect } from 'react-router-dom'
 
 import { SPOTIFY_QS } from 'utils/constants'
-import { loginUser, spotifyLogin } from 'actions/session'
+import { loginUser, spotifyLogin } from 'state/actions/session'
 import Btn from 'components/Btn/Btn'
 import Tier from 'components/Tier/Tier'
 import Container from 'components/Container/Container'

@@ -4,7 +4,7 @@ import qs from 'query-string'
 import OauthPopup from 'react-oauth-popup'
 
 import { SPOTIFY_QS } from 'utils/constants'
-import { spotifyConnect } from 'actions/session'
+import { spotifyConnect } from 'state/actions/session'
 import Container from 'components/Container/Container'
 import Tier from 'components/Tier/Tier'
 import Txt from 'components/Txt/Txt'

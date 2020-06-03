@@ -6,11 +6,11 @@ import {
   SET_ALBUMS_HAS_MORE,
   SET_ALBUMS_TOTAL_COUNT,
   SET_ALBUMS_INFINITE_LOADING,
-} from 'types/actions'
+  SET_ALBUM_SORT,
+} from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
-import { getAlbums } from 'gql'
-import { SET_ALBUM_SORT } from '../types/actions'
+import { getAlbums } from '../gql'
 
 export const queryAlbums = () => async (dispatch, getState) => {
   dispatch({ type: SET_ALBUMS, payload: [] })

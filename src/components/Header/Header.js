@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { withRouter } from 'react-router'
-import { logoutUser } from 'actions/session'
+import { logoutUser } from 'state/actions/session'
 
 import Txt from 'components/Txt/Txt'
 import Btn from 'components/Btn/Btn'

@@ -5,7 +5,7 @@ import {
   LOGIN_LOADING,
   SET_SPOTIFY_TOKEN,
   LOGOUT_USER,
-} from 'types/actions'
+} from '../types/actions'
 
 const initialState = { currentUser: {} }
 

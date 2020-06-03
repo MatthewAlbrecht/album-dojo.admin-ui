@@ -42,8 +42,11 @@
 @import 'components/AlbumCardSimple/AlbumCardSimple';
 @import 'components/AlbumList/AlbumList';
 @import 'components/AlbumRow/AlbumRow';
+@import 'components/AlbumRowTooltip/AlbumRowTooltip';
 @import 'components/BgImage/BgImage';
 @import 'components/Btn/Btn';
+@import 'components/CheckboxGroup/CheckboxGroup';
+@import 'components/Checkbox/Checkbox';
 @import 'components/ListControls/ListControls';
 @import 'components/Footer/Footer';
 @import 'components/Header/Header';
@@ -60,7 +63,7 @@
 // LAYOUTS
 // ---------------------------------
 
-@import 'layouts/PrivateLayout/PrivateLayout';
+@import 'Layouts/PrivateLayout/PrivateLayout';
 
 // ---------------------------------
 // PAGES

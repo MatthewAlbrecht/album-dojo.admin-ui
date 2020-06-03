@@ -6,7 +6,7 @@ import Footer from 'components/Footer/Footer'
 import Header from 'components/Header/Header'
 import TabListener from 'components/TabListener/TabListener'
 import ScrollToTop from 'components/ScrollToTop/ScrollToTop'
-import PrivateLayout from 'layouts/PrivateLayout/PrivateLayout'
+import PrivateLayout from 'Layouts/PrivateLayout/PrivateLayout'
 
 export default function App() {
   return (

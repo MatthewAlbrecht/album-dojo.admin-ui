@@ -1,0 +1,48 @@
+/* ---------------------------------------------
+ Album Row Tooltip
+--------------------------------------------- */
+
+.albumRow-tooltip {
+  position: absolute;
+  right: rhythm(8);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: rhythm(1) rhythm(2);
+  width: 14rem;
+  background-color: $COLOR_LIGHTEST;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: $BORDER_RADIUS;
+  z-index: $Z_TOOLTIP;
+
+  &_genreActive {
+    width: auto;
+  }
+}
+
+.albumRow-tooltipItem {
+  &:first-of-type {
+    padding-top: 0;
+  }
+  &:last-of-type {
+    padding-bottom: 0;
+  }
+  padding: rhythm(1) 0;
+  & + .albumRow-tooltipItem {
+    border-top: 0.1rem solid $COLOR_GREY_SHELF;
+  }
+}
+
+.albumRow-tooltipSubmitBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

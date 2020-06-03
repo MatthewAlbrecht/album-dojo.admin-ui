@@ -1,4 +1,4 @@
-import { SET_TOKEN, SET_SPOTIFY_TOKEN } from 'types/actions'
+import { SET_TOKEN, SET_SPOTIFY_TOKEN } from '../types/actions'
 
 export const getNewTokens = async (session, dispatch) => {
   console.log('session ==='.toUpperCase(), session)

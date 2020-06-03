@@ -14,24 +14,24 @@ export default function ListControls({
 }) {
   return (
     <form className="listControls" onSubmit={onFormSubmit} id="listControls">
-      <TextInput
-        name="search"
-        id="list-search"
-        icon="Search"
-        iconClasses="search 16"
-        placeholder="Search List..."
-        defaultValue={searchDefault}
-        onChange={onSearchUpdate}
-      />
-      <Box classes="left2">
-        <SelectDropdown
-          name="sort"
-          id="album-sort"
-          options={sortOptions}
-          defaultValue={sortDefault}
-          onChange={onSortUpdate}
+      <Box classes="right2">
+        <TextInput
+          name="search"
+          id="list-search"
+          icon="Search"
+          iconClasses="search 16"
+          placeholder="Search List..."
+          defaultValue={searchDefault}
+          onChange={onSearchUpdate}
         />
       </Box>
+      <SelectDropdown
+        name="sort"
+        id="album-sort"
+        options={sortOptions}
+        defaultValue={sortDefault}
+        onChange={onSortUpdate}
+      />
     </form>
   )
 }

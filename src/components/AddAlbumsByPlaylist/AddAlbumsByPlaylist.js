@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Infinite from 'react-infinite'
 
-import { addAlbumsByPlaylistId } from 'actions/spotify'
+import { addAlbumsByPlaylistId } from 'state/actions/spotify'
 import Txt from 'components/Txt/Txt'
 import Btn from 'components/Btn/Btn'
 import TextInput from 'components/TextInput/TextInput'

@@ -5,13 +5,13 @@
 --------------------------------------------- */
 
 .btn {
-  background: linear-gradient(90deg, #0032a2, #215dde);
+  background: linear-gradient(90deg, $COLOR_BLUE_LIGHT, $COLOR_BLUE_DARK);
   border-radius: $BORDER_RADIUS;
   color: $COLOR_LIGHTEST;
   display: inline-block;
   font-family: $FONT_FAMILY_PRIMARY;
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.1rem;
   line-height: 1.2;
   min-width: 12.8rem;
@@ -27,7 +27,17 @@
 
   &:disabled {
     cursor: unset;
+    background: linear-gradient(
+      90deg,
+      grayscale($COLOR_BLUE_LIGHT),
+      grayscale($COLOR_BLUE_DARK)
+    );
   }
+}
+
+.btn_small {
+  min-width: 10rem;
+  padding: 0.8rem rhythm(2) 0.9rem;
 }
 
 .btn_secondary {

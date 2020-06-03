@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { getImageSrc } from 'utils/srcSelector'
 import Box from 'components/Box/Box'
 import Img from 'components/Img/Img'
 import Txt from 'components/Txt/Txt'
 import Icon from 'components/Icon/Icon'
+import AlbumRowTooltip from 'components/AlbumRowTooltip/AlbumRowTooltip'
 
 export default function AlbumRow({ album }) {
+  const [isVisible, setVisible] = useState(false)
   return (
     <li className="albumRow">
       <div className="albumRow-img">
@@ -32,6 +34,17 @@ export default function AlbumRow({ album }) {
           <Icon type="Spotify" classes="spotify nudgeDown2 20" />
         </a>
       </Box>
+      <Box classes="left1">
+        <button
+          className="albumRow-menuIcon"
+          onClick={() => setVisible(!isVisible)}
+        >
+          <Icon type="EllipsisV" classes="ellipsis nudgeDown2 20" />
+        </button>
+      </Box>
+      {isVisible && (
+        <AlbumRowTooltip isVisible={isVisible} setVisible={setVisible} />
+      )}
     </li>
   )
 }

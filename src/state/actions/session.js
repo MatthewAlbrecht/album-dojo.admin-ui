@@ -5,10 +5,10 @@ import {
   LOGIN_LOADING,
   SET_SPOTIFY_TOKEN,
   LOGOUT_USER,
-} from 'types/actions'
+} from '../types/actions'
 import qs from 'query-string'
 import { request } from 'graphql-request'
-import { loginUserMutation } from 'gql'
+import { loginUserMutation } from '../gql'
 
 export const loginUser = data => async dispatch => {
   console.log('HERE')

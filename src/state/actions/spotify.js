@@ -5,11 +5,11 @@ import {
   ADD_ALBUMS_BY_PLAYLIST,
   ADD_ALBUMS_BY_PLAYLIST_ERROR,
   ADD_ALBUMS_BY_PLAYLIST_LOADING,
-} from 'types/actions'
-import { getNewTokens } from 'actions/helpers'
+} from '../types/actions'
+import { getNewTokens } from './helpers'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
-import { addAlbumByIdMutation, addAlbumsByPlaylistMutation } from 'gql'
+import { addAlbumByIdMutation, addAlbumsByPlaylistMutation } from '../gql'
 
 export const addAlbumBySpotifyId = id => async (dispatch, getState) => {
   const { session } = getState()

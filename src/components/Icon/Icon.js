@@ -2,6 +2,7 @@ import React from 'react'
 import Info from './Icons/Info'
 import Search from './Icons/Search'
 import Spotify from './Icons/Spotify'
+import EllipsisV from './Icons/EllipsisV'
 import classnames from 'classnames'
 
 export default function Icon({ className, type, classes }) {
@@ -13,6 +14,7 @@ export default function Icon({ className, type, classes }) {
     Info: <Info />,
     Search: <Search />,
     Spotify: <Spotify />,
+    EllipsisV: <EllipsisV />,
   }
 
   function getClassName() {
