@@ -9,6 +9,7 @@ import AlbumRowTooltip from 'components/AlbumRowTooltip/AlbumRowTooltip'
 
 export default function AlbumRow({ album }) {
   const [isVisible, setVisible] = useState(false)
+
   return (
     <li className="albumRow">
       <div className="albumRow-img">
@@ -42,9 +43,7 @@ export default function AlbumRow({ album }) {
           <Icon type="EllipsisV" classes="ellipsis nudgeDown2 20" />
         </button>
       </Box>
-      {isVisible && (
-        <AlbumRowTooltip isVisible={isVisible} setVisible={setVisible} />
-      )}
+      {isVisible && <AlbumRowTooltip setVisible={setVisible} album={album} />}
     </li>
   )
 }

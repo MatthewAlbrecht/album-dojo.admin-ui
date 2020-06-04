@@ -7,10 +7,13 @@ import {
   SET_ALBUMS_TOTAL_COUNT,
   SET_ALBUMS_INFINITE_LOADING,
   SET_ALBUM_SORT,
+  SET_UPDATING_ALBUM_ERROR,
+  SET_UPDATING_ALBUM_LOADING,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
-import { getAlbums } from '../gql'
+import { getAlbums, updateAlbum as updateAlbumMutation } from '../gql'
+import { toast } from 'react-toastify'
 
 export const queryAlbums = () => async (dispatch, getState) => {
   dispatch({ type: SET_ALBUMS, payload: [] })
@@ -36,8 +39,8 @@ export const queryAlbums = () => async (dispatch, getState) => {
     })
     .catch(error => {
       const errorType = get(error, 'response.errors[0].message')
-      console.log('error ==='.toUpperCase(), error)
-      console.log('errorType ==='.toUpperCase(), errorType)
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
     })
 
   if (albumResponse) {
@@ -80,8 +83,8 @@ export const queryNextAlbums = () => async (dispatch, getState) => {
     })
     .catch(error => {
       const errorType = get(error, 'response.errors[0].message')
-      console.log('error ==='.toUpperCase(), error)
-      console.log('errorType ==='.toUpperCase(), errorType)
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
       dispatch({ type: SET_ALBUMS_INFINITE_LOADING, payload: false })
     })
 
@@ -113,4 +116,53 @@ export const onSearchUpdate = e => dispatch => {
 export const onSortUpdate = e => dispatch => {
   dispatch({ type: SET_ALBUM_SORT, payload: e.target.value })
   dispatch({ type: SET_ALBUM_QUERY_UPDATED, payload: true })
+}
+
+export const updateAlbum = (id, updatedProperties = {}, onSuccess) => async (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: SET_UPDATING_ALBUM_ERROR, payload: null })
+  dispatch({ type: SET_UPDATING_ALBUM_LOADING, payload: true })
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const albumUpdateResponse = await client
+    .request(updateAlbumMutation, {
+      album: {
+        id,
+        ...updatedProperties,
+      },
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_UPDATING_ALBUM_ERROR, payload: null })
+      dispatch({ type: SET_UPDATING_ALBUM_LOADING, payload: false })
+    })
+
+  if (albumUpdateResponse) {
+    const { updateAlbum } = albumUpdateResponse
+    let albums = [...getState().albums.albums]
+    albums = albums.map(album =>
+      album.id === updateAlbum.id ? updateAlbum : album
+    )
+    dispatch({ type: SET_ALBUMS, payload: albums })
+    dispatch({ type: SET_UPDATING_ALBUM_ERROR, payload: null })
+    dispatch({ type: SET_UPDATING_ALBUM_LOADING, payload: false })
+    onSuccess()
+    console.log('updateAlbum ==='.toUpperCase(), updateAlbum)
+    toast.success(
+      `Album Updated: ${updateAlbum.name} by ${updateAlbum.artists
+        .map(artist => artist.name)
+        .join(', ')}`
+    )
+  }
 }

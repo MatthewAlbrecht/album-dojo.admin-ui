@@ -1,12 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+
 import { publicRoutes, privateRoutes } from 'config/routes'
 import Footer from 'components/Footer/Footer'
 import Header from 'components/Header/Header'
 import TabListener from 'components/TabListener/TabListener'
 import ScrollToTop from 'components/ScrollToTop/ScrollToTop'
 import PrivateLayout from 'Layouts/PrivateLayout/PrivateLayout'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function App() {
   return (
@@ -34,6 +38,7 @@ export default function App() {
         <Footer />
         <TabListener />
         <ScrollToTop />
+        <ToastContainer />
       </div>
     </Router>
   )

@@ -1,0 +1,74 @@
+html {
+  .Toastify__toast-container {
+  }
+
+  /** Used to define the position of the ToastContainer **/
+  .Toastify__toast-container--top-left {
+  }
+  .Toastify__toast-container--top-center {
+  }
+  .Toastify__toast-container--top-right {
+    top: rhythm(8);
+    right: rhythm(1);
+  }
+  .Toastify__toast-container--bottom-left {
+  }
+  .Toastify__toast-container--bottom-center {
+  }
+  .Toastify__toast-container--bottom-right {
+  }
+
+  /** Classes for the displayed toast **/
+  .Toastify__toast {
+    border-radius: $BORDER_RADIUS;
+    font-family: $FONT_FAMILY_PRIMARY;
+    padding: rhythm(1) rhythm(2) rhythm(2);
+    min-height: rhythm(6);
+    line-height: 1.3;
+  }
+  .Toastify__toast--rtl {
+  }
+  .Toastify__toast--dark {
+  }
+  .Toastify__toast--default {
+  }
+  .Toastify__toast--info {
+  }
+  .Toastify__toast--success {
+    background-color: $COLOR_SUCCESS_GREEN;
+    // background: linear-gradient(90deg, $COLOR_BLUE_LIGHT, $COLOR_BLUE_DARK);
+
+    color: $COLOR_LIGHTEST;
+  }
+  .Toastify__toast--warning {
+  }
+  .Toastify__toast--error {
+  }
+  .Toastify__toast-body {
+  }
+
+  /** Classes for the close button. Better use your own closeButton **/
+  .Toastify__close-button {
+  }
+  .Toastify__close-button--default {
+  }
+  .Toastify__close-button > svg {
+  }
+  .Toastify__close-button:hover,
+  .Toastify__close-button:focus {
+  }
+
+  /** Classes for the progress bar **/
+  .Toastify__progress-bar {
+  }
+  .Toastify__progress-bar--animated {
+  }
+  .Toastify__progress-bar--controlled {
+  }
+  .Toastify__progress-bar--rtl {
+  }
+  .Toastify__progress-bar--default {
+  }
+  .Toastify__progress-bar--dark {
+  }
+}

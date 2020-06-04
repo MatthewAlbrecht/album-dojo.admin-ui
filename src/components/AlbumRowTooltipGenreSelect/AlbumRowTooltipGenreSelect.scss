@@ -1,0 +1,18 @@
+/* ---------------------------------------------
+ Album Row Tooltip Genre Select
+--------------------------------------------- */
+
+.albumRow-tooltipSubmitBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

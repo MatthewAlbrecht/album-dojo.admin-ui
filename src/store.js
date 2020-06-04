@@ -33,6 +33,8 @@ export default function configureStore(initialState = {}) {
     delete state.spotify.newAlbumsByPlaylistLoading
     delete state.spotify.newAlbumsByPlaylistError
 
+    state.genres.genreOptions = []
+
     state.albums.albums = []
     state.albums.hasMore = true
     delete state.albums.isInfiniteLoading

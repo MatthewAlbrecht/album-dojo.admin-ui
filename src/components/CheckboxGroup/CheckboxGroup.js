@@ -25,7 +25,6 @@ const CheckboxGroup = ({
     'checkboxGroup-content',
     `checkboxGroup-content--${numOfCol}col`
   )
-  console.log('value ==='.toUpperCase(), value)
   return (
     <fieldset className={checkboxGroupClasses}>
       {label && <label className="checkboxGroup-label">{label}</label>}

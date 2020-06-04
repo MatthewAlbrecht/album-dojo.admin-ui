@@ -24,6 +24,25 @@ export const getAlbums = print(gql`
         artists
         images
         spotifyId
+        genres {
+          id
+        }
+      }
+    }
+  }
+`)
+
+export const updateAlbum = print(gql`
+  mutation updateAlbum($album: AlbumInputTypeUpdate!) {
+    updateAlbum(album: $album) {
+      id
+      name
+      artists
+      images
+      spotifyId
+      genres {
+        id
+        name
       }
     }
   }

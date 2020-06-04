@@ -3,7 +3,7 @@ import { print } from 'graphql/language/printer'
 
 export const getGenres = print(gql`
   query getGenres(
-    $sort: genreSort!
+    $sort: nameSort!
     $sortOrder: sortOrder!
     $after: String
     $searchTerm: String

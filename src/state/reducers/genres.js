@@ -1,45 +1,58 @@
 import {
-  SET_ALBUMS,
-  SET_ALBUM_SEARCH,
-  SET_ALBUM_SORT,
-  SET_ALBUM_QUERY_UPDATED,
-  SET_ALBUMS_CURSOR,
-  SET_ALBUMS_HAS_MORE,
-  SET_ALBUMS_TOTAL_COUNT,
-  SET_ALBUMS_INFINITE_LOADING,
+  SET_GENRE_OPTIONS,
+  SET_GENRE_OPTIONS_ERROR,
+  SET_GENRE_OPTIONS_LOADING,
+  SET_GENRES,
+  SET_GENRE_SEARCH,
+  SET_GENRE_SORT,
+  SET_GENRE_QUERY_UPDATED,
+  SET_GENRES_CURSOR,
+  SET_GENRES_HAS_MORE,
+  SET_GENRES_TOTAL_COUNT,
+  SET_GENRES_INFINITE_LOADING,
 } from '../types/actions'
 
 const initialState = {
-  albums: [],
+  genreOptions: [],
+  genres: [],
   sortValue: 'createdAt:DESC',
   sortUpdated: false,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_ALBUMS:
-      console.log('made it to SET_ALBUMS')
-      return { ...state, albums: action.payload }
-    case SET_ALBUM_SEARCH:
-      console.log('made it to SET_ALBUM_SEARCH')
+    case SET_GENRE_OPTIONS:
+      console.log('made it to SET_GENRE_OPTIONS')
+      return { ...state, genreOptions: action.payload }
+    case SET_GENRE_OPTIONS_ERROR:
+      console.log('made it to SET_GENRE_OPTIONS_ERROR')
+      return { ...state, genreOptionsError: action.payload }
+    case SET_GENRE_OPTIONS_LOADING:
+      console.log('made it to SET_GENRE_OPTIONS_LOADING')
+      return { ...state, genreOptionsLoading: action.payload }
+    case SET_GENRES:
+      console.log('made it to SET_GENRES')
+      return { ...state, genres: action.payload }
+    case SET_GENRE_SEARCH:
+      console.log('made it to SET_GENRE_SEARCH')
       return { ...state, searchTerm: action.payload }
-    case SET_ALBUM_QUERY_UPDATED:
-      console.log('made it to SET_ALBUM_QUERY_UPDATED')
+    case SET_GENRE_QUERY_UPDATED:
+      console.log('made it to SET_GENRE_QUERY_UPDATED')
       return { ...state, queryUpdated: action.payload }
-    case SET_ALBUMS_CURSOR:
-      console.log('made it to SET_ALBUMS_CURSOR')
+    case SET_GENRES_CURSOR:
+      console.log('made it to SET_GENRES_CURSOR')
       return { ...state, cursor: action.payload }
-    case SET_ALBUMS_HAS_MORE:
-      console.log('made it to SET_ALBUMS_HAS_MORE')
+    case SET_GENRES_HAS_MORE:
+      console.log('made it to SET_GENRES_HAS_MORE')
       return { ...state, hasMore: action.payload }
-    case SET_ALBUMS_TOTAL_COUNT:
-      console.log('made it to SET_ALBUMS_TOTAL_COUNT')
+    case SET_GENRES_TOTAL_COUNT:
+      console.log('made it to SET_GENRES_TOTAL_COUNT')
       return { ...state, totalCount: action.payload }
-    case SET_ALBUMS_INFINITE_LOADING:
-      console.log('made it to SET_ALBUMS_INFINITE_LOADING')
+    case SET_GENRES_INFINITE_LOADING:
+      console.log('made it to SET_GENRES_INFINITE_LOADING')
       return { ...state, isInfiniteLoading: action.payload }
-    case SET_ALBUM_SORT:
-      console.log('made it to SET_ALBUM_SORT')
+    case SET_GENRE_SORT:
+      console.log('made it to SET_GENRE_SORT')
       return {
         ...state,
         sortValue: action.payload,

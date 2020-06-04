@@ -5,6 +5,7 @@
 @import 'styles/helpers/variables';
 @import 'styles/helpers/mixins';
 @import 'styles/helpers/functions';
+@import 'styles/helpers/toastify';
 
 // ----------------------
 // BASE
@@ -43,6 +44,7 @@
 @import 'components/AlbumList/AlbumList';
 @import 'components/AlbumRow/AlbumRow';
 @import 'components/AlbumRowTooltip/AlbumRowTooltip';
+@import 'components/AlbumRowTooltipGenreSelect/AlbumRowTooltipGenreSelect';
 @import 'components/BgImage/BgImage';
 @import 'components/Btn/Btn';
 @import 'components/CheckboxGroup/CheckboxGroup';
