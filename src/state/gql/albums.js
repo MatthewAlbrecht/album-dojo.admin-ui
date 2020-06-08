@@ -14,6 +14,8 @@ export const getAlbums = print(gql`
       sortOrder: $sortOrder
       after: $after
       searchTerm: $searchTerm
+      showDuplicates: false
+      showInactive: false
     ) {
       hasMore
       cursor

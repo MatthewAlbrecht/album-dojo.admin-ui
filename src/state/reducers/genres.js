@@ -10,12 +10,14 @@ import {
   SET_GENRES_HAS_MORE,
   SET_GENRES_TOTAL_COUNT,
   SET_GENRES_INFINITE_LOADING,
+  SET_UPDATING_GENRE_ERROR,
+  SET_UPDATING_GENRE_LOADING,
 } from '../types/actions'
 
 const initialState = {
   genreOptions: [],
   genres: [],
-  sortValue: 'createdAt:DESC',
+  sortValue: 'name:ASC',
   sortUpdated: false,
 }
 
@@ -51,6 +53,12 @@ export default (state = initialState, action) => {
     case SET_GENRES_INFINITE_LOADING:
       console.log('made it to SET_GENRES_INFINITE_LOADING')
       return { ...state, isInfiniteLoading: action.payload }
+    case SET_UPDATING_GENRE_ERROR:
+      console.log('made it to SET_UPDATING_GENRE_ERROR')
+      return { ...state, updateGenreError: action.payload }
+    case SET_UPDATING_GENRE_LOADING:
+      console.log('made it to SET_UPDATING_GENRE_LOADING')
+      return { ...state, updateGenreLoading: action.payload }
     case SET_GENRE_SORT:
       console.log('made it to SET_GENRE_SORT')
       return {

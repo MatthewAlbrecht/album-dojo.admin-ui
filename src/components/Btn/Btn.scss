@@ -5,7 +5,7 @@
 --------------------------------------------- */
 
 .btn {
-  background: linear-gradient(90deg, $COLOR_BLUE_LIGHT, $COLOR_BLUE_DARK);
+  background: linear-gradient(180deg, $COLOR_BLUE_LIGHT, $COLOR_BLUE_DARK);
   border-radius: $BORDER_RADIUS;
   color: $COLOR_LIGHTEST;
   display: inline-block;
@@ -43,6 +43,18 @@
 .btn_secondary {
   background: $COLOR_LIGHTEST;
   color: $COLOR_DEFAULT_COPY;
+}
+
+.btn_shadow {
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.btn_circle {
+  height: rhythm(4);
+  width: rhythm(4);
+  border-radius: 100%;
+  min-width: auto;
+  padding: 0;
 }
 
 .btn_loading {

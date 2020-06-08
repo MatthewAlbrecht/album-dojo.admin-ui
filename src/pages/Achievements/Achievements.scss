@@ -1,0 +1,19 @@
+/* ---------------------------------------------
+ Achievements Page
+--------------------------------------------- */
+
+.achievementsPage-addButton {
+  transition: transform 0.2s $EASEOUT_QUAD;
+  &:hover {
+    transform: scale(1.08);
+  }
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

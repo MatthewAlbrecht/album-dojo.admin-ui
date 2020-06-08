@@ -21,19 +21,6 @@
   }
 }
 
-.albumRow-tooltipItem {
-  &:first-of-type {
-    padding-top: 0;
-  }
-  &:last-of-type {
-    padding-bottom: 0;
-  }
-  padding: rhythm(1) 0;
-  & + .albumRow-tooltipItem {
-    border-top: 0.1rem solid $COLOR_GREY_SHELF;
-  }
-}
-
 @include breakpoint(breakpoint-size(md)) {
 }
 

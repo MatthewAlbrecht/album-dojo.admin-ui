@@ -1,18 +1,18 @@
 import React from 'react'
 import Infinite from 'react-infinite'
 
-import AlbumRow from 'components/AlbumRow/AlbumRow'
 import Spinner from 'components/Spinner/Spinner'
 
-export default function AlbumList({
-  albums,
+export default function DataLaist({
   handleInfiniteLoad,
   isInfiniteLoading,
   hasMore,
+  children,
+  className,
 }) {
   return (
     <Infinite
-      className="albumList"
+      className={className}
       elementHeight={64}
       useWindowAsScrollContainer
       preloadBatchSize={Infinite.containerHeightScaleFactor(0.75)}
@@ -22,9 +22,7 @@ export default function AlbumList({
       loadingSpinnerDelegate={<Spinner />}
       isInfiniteLoading={isInfiniteLoading}
     >
-      {albums.map(album => (
-        <AlbumRow key={album.id} album={album} />
-      ))}
+      {children}
     </Infinite>
   )
 }

@@ -141,8 +141,9 @@ export const spotifyRefresh = () => async (dispatch, getState) => {
     })
 }
 
-export const logoutUser = code => dispatch => {
+export const logoutUser = () => dispatch => {
   dispatch({
     type: LOGOUT_USER,
   })
+  localStorage.removeItem('state')
 }

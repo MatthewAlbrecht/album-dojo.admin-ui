@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
+import cn from 'classnames'
+import { useDispatch } from 'react-redux'
 
+import { setDuplicate } from 'state/actions/albums'
 import { getImageSrc } from 'utils/srcSelector'
 import Box from 'components/Box/Box'
 import Img from 'components/Img/Img'
@@ -7,17 +10,36 @@ import Txt from 'components/Txt/Txt'
 import Icon from 'components/Icon/Icon'
 import AlbumRowTooltip from 'components/AlbumRowTooltip/AlbumRowTooltip'
 
-export default function AlbumRow({ album }) {
+export default function AlbumRow({ album, primaryDuplicate, duplicates = [] }) {
   const [isVisible, setVisible] = useState(false)
+  const dispatch = useDispatch()
+
+  const albumRowClasses = cn([
+    'albumRow',
+    primaryDuplicate === album.id && 'albumRow_primaryDuplicate',
+    duplicates.includes(album.id) && 'albumRow_duplicate',
+  ])
+
+  const handleRowClick = () => {
+    if (primaryDuplicate) {
+      dispatch(setDuplicate(album.id))
+    }
+  }
 
   return (
-    <li className="albumRow">
+    <li className={albumRowClasses} onClick={handleRowClick}>
       <div className="albumRow-img">
         <Box classes="right2">
           <Img rounded srcUrl={getImageSrc(0, album.images)} size="40" />
         </Box>
       </div>
-      <Txt tag="p" size="18" color="DefaultCopy" content={album.name} />
+      <Txt
+        className="albumRow-name"
+        tag="p"
+        size="18"
+        color="DefaultCopy"
+        content={album.name}
+      />
       <Txt
         className="albumRow-artist"
         tag="p"

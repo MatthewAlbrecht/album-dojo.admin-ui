@@ -1,0 +1,82 @@
+/* ---------------------------------------------
+ Flex Utility Classes
+--------------------------------------------- */
+
+$justifiers: (
+  flexStart: flex-start,
+  flexEnd: flex-end,
+  center: center,
+  spaceBetween: space-between,
+  spaceAround: space-around,
+) !default;
+
+$aligners: (
+  flexStart: flex-start,
+  flexEnd: flex-end,
+  center: center,
+  baseline: baseline,
+  stretch: stretch,
+) !default;
+
+$directions: (
+  row: row,
+  rowReverse: row-reverse,
+  column: column,
+  columnReverse: column-reverse,
+) !default;
+
+@mixin justifier-props($justifier) {
+  justify-content: $justifier;
+}
+
+@mixin aligner-props($aligner) {
+  align-items: $aligner;
+}
+
+@mixin direction-props($direction) {
+  flex-direction: $direction;
+}
+
+@mixin build-justifiers($justifier-name, $justifier-value, $bp: '') {
+  .flexJustifier_#{$justifier-name}#{capitalize($bp)} {
+    @include justifier-props($justifier-value);
+  }
+}
+
+@mixin build-aligners($aligner-name, $aligner-value, $bp: '') {
+  .flexAligner_#{$aligner-name}#{capitalize($bp)} {
+    @include aligner-props($aligner-value);
+  }
+}
+
+@mixin build-directions($direction-name, $direction-value, $bp: '') {
+  .flexDirection_#{$direction-name}#{capitalize($bp)} {
+    @include direction-props($direction-value);
+  }
+}
+
+@each $name, $value in $justifiers {
+  @include build-justifiers($name, $value);
+}
+
+@each $name, $value in $aligners {
+  @include build-aligners($name, $value);
+}
+
+@each $name, $value in $directions {
+  @include build-directions($name, $value);
+}
+
+@each $bp-name, $bp-size in $breakpoints {
+  @include breakpoint($bp-size) {
+    @each $name, $value in $justifiers {
+      @include build-justifiers($name, $value, $bp-name);
+    }
+    @each $name, $value in $aligners {
+      @include build-aligners($name, $value, $bp-name);
+    }
+    @each $name, $value in $directions {
+      @include build-directions($name, $value, $bp-name);
+    }
+  }
+}

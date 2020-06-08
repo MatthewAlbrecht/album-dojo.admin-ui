@@ -9,9 +9,47 @@
   height: rhythm(8);
   padding: 0 rhythm(5);
   position: relative;
+  cursor: pointer;
 
   &:nth-child(odd) {
     background-color: $COLOR_GREY_SHELF;
+  }
+
+  &.albumRow_duplicate:after {
+    content: '';
+    width: rhythm(1.5);
+    height: rhythm(1.5);
+    border-radius: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: rhythm(1.5);
+    position: absolute;
+    background: $COLOR_BLUE_LIGHT;
+  }
+
+  &.albumRow_primaryDuplicate {
+    background: linear-gradient(180deg, $COLOR_BLUE_LIGHT, $COLOR_BLUE_DARK);
+    border-radius: $BORDER_RADIUS;
+
+    .albumRow-name {
+      color: $COLOR_LIGHTEST;
+    }
+
+    .albumRow-artist {
+      color: $COLOR_LIGHTEST;
+    }
+
+    .albumRow-spotifyIcon {
+      .primaryFill {
+        fill: $COLOR_LIGHTEST;
+      }
+    }
+
+    .albumRow-menuIcon {
+      .primaryFill {
+        fill: $COLOR_LIGHTEST;
+      }
+    }
   }
 }
 

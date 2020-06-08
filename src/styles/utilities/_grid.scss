@@ -1,0 +1,56 @@
+.grid {
+  display: grid;
+}
+
+@mixin grid-col-span-props($colIndex, $spanIndex) {
+  grid-column: $colIndex / span $spanIndex;
+}
+
+@mixin grid-row-span-props($rowIndex) {
+  grid-row: $rowIndex;
+}
+
+// top level mixin to build the grid including all row and column classes
+@mixin build-grid(
+  $breakpoint,
+  $num-columns: $grid-num-columns,
+  $gutter: $grid-gutter-width
+) {
+  .grid {
+    grid-gap: $gutter;
+  }
+
+  @for $gridColIndex from 1 through $num-columns {
+    .grid--col#{$gridColIndex}#{$breakpoint} {
+      grid-template-columns: repeat($gridColIndex, 1fr);
+    }
+  }
+
+  @for $colIndex from 1 through $num-columns {
+    @for $spanIndex from 1 through $num-columns {
+      .gridItem--#{$colIndex}span#{$spanIndex}#{$breakpoint} {
+        @include grid-col-span-props($colIndex, $spanIndex);
+      }
+    }
+  }
+
+  @for $rowIndex from 1 through 10 {
+    .gridItem--row#{$rowIndex}#{$breakpoint} {
+      @include grid-row-span-props($rowIndex);
+    }
+  }
+}
+
+@include build-grid('', 4, 3.2rem);
+
+@include breakpoint(breakpoint-size(md)) {
+  @include build-grid('Md', 4, 3.2rem);
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+  @include build-grid('Lg', 4, 3.2rem);
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+  @include build-grid('Xl', 4, 3.2rem);
+}

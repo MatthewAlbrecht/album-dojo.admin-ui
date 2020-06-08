@@ -1,0 +1,46 @@
+/* ---------------------------------------------
+ Text Input
+--------------------------------------------- */
+
+.textBox {
+}
+
+.textBox-label {
+  padding-bottom: 0.4rem;
+  padding-left: 0.4rem;
+  display: block;
+}
+
+.textBox-input {
+  border: 0.1rem solid $COLOR_GREY_LIGHT;
+  padding: 1rem rhythm(2);
+  font-size: 1.6rem;
+  border-radius: $BORDER_RADIUS;
+  font-family: $FONT_FAMILY_PRIMARY;
+  width: 100%;
+
+  &_iconActive {
+    padding-right: rhythm(5);
+  }
+}
+
+.textBox-inputContainer {
+  position: relative;
+  display: inline;
+}
+
+.textBox-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: rhythm(2);
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

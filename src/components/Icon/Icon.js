@@ -3,6 +3,8 @@ import Info from './Icons/Info'
 import Search from './Icons/Search'
 import Spotify from './Icons/Spotify'
 import EllipsisV from './Icons/EllipsisV'
+import Times from './Icons/Times'
+import Plus from './Icons/Plus'
 import classnames from 'classnames'
 
 export default function Icon({ className, type, classes }) {
@@ -15,6 +17,8 @@ export default function Icon({ className, type, classes }) {
     Search: <Search />,
     Spotify: <Spotify />,
     EllipsisV: <EllipsisV />,
+    Plus: <Plus />,
+    Times: <Times />,
   }
 
   function getClassName() {

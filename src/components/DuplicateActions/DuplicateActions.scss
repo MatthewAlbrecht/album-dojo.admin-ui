@@ -1,0 +1,18 @@
+/* ---------------------------------------------
+ Duplicate Actions
+--------------------------------------------- */
+
+.duplicateActions {
+  position: fixed;
+  bottom: rhythm(8);
+  right: rhythm(1);
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

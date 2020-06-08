@@ -10,11 +10,11 @@ $displays: (
   none: none,
   table: table,
   tableCell: table-cell,
-  tableRow: table-row
+  tableRow: table-row,
 ) !default;
 
 @mixin display-props($display) {
-  display: $display !important;
+  display: $display;
 }
 
 @mixin build-displays($display-name, $display-value, $bp: '') {

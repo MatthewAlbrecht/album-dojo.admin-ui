@@ -9,12 +9,19 @@ import {
   SET_ALBUMS_INFINITE_LOADING,
   SET_UPDATING_ALBUM_ERROR,
   SET_UPDATING_ALBUM_LOADING,
+  SET_PRIMARY_DUPLICATE,
+  SET_DUPLICATES,
+  SET_ALBUM_SHOW_DUPLICATES,
+  SET_ALBUM_SHOW_INACTIVE,
 } from '../types/actions'
 
 const initialState = {
   albums: [],
   sortValue: 'createdAt:DESC',
   sortUpdated: false,
+  duplicates: [],
+  showDuplicates: false,
+  showInactive: false,
 }
 
 export default (state = initialState, action) => {
@@ -42,16 +49,25 @@ export default (state = initialState, action) => {
       return { ...state, isInfiniteLoading: action.payload }
     case SET_UPDATING_ALBUM_ERROR:
       console.log('made it to SET_UPDATING_ALBUM_ERROR')
-      return { ...state, albumUpdateError: action.payload }
+      return { ...state, updateAlbumError: action.payload }
     case SET_UPDATING_ALBUM_LOADING:
       console.log('made it to SET_UPDATING_ALBUM_LOADING')
-      return { ...state, albumUpdateLoading: action.payload }
+      return { ...state, updateAlbumLoading: action.payload }
+    case SET_PRIMARY_DUPLICATE:
+      console.log('made it to SET_PRIMARY_DUPLICATE')
+      return { ...state, primaryDuplicate: action.payload }
+    case SET_DUPLICATES:
+      console.log('made it to SET_DUPLICATES')
+      return { ...state, duplicates: action.payload }
+    case SET_ALBUM_SHOW_DUPLICATES:
+      console.log('made it to SET_ALBUM_SHOW_DUPLICATES')
+      return { ...state, showDuplicates: action.payload }
+    case SET_ALBUM_SHOW_INACTIVE:
+      console.log('made it to SET_ALBUM_SHOW_INACTIVE')
+      return { ...state, showInactive: action.payload }
     case SET_ALBUM_SORT:
       console.log('made it to SET_ALBUM_SORT')
-      return {
-        ...state,
-        sortValue: action.payload,
-      }
+      return { ...state, sortValue: action.payload }
     default:
       return state
   }

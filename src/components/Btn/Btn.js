@@ -11,7 +11,7 @@ export default class Btn extends Component {
   }
 
   get className() {
-    const { pill, full, secondary, loading } = this.props
+    const { pill, full, secondary, loading, shadow, circle } = this.props
 
     return classnames(
       'btn',
@@ -20,7 +20,9 @@ export default class Btn extends Component {
       { btn_secondary: secondary },
       { btn_pill: pill },
       { btn_full: full },
-      { btn_loading: loading }
+      { btn_loading: loading },
+      { btn_shadow: shadow },
+      { btn_circle: circle }
     )
   }
 

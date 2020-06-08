@@ -25,3 +25,12 @@ export const getGenres = print(gql`
     }
   }
 `)
+
+export const updateGenre = print(gql`
+  mutation updateGenre($genre: GenreInputTypeUpdate!) {
+    updateGenre(genre: $genre) {
+      id
+      name
+    }
+  }
+`)

@@ -1,0 +1,41 @@
+/* ---------------------------------------------
+ Modal Container
+--------------------------------------------- */
+
+.ReactModal__Overlay {
+  z-index: $Z_MODAL;
+  backdrop-filter: blur(rhythm(2));
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.Modal {
+  border-radius: $BORDER_RADIUS;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background: $COLOR_LIGHTEST;
+  overflow: auto;
+  outline: none;
+  padding: rhythm(3) rhythm(2) rhythm(2);
+  min-width: 50vw;
+}
+
+.modalContainer-closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: rhythm(1) rhythm(1) rhythm(2) rhythm(2);
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

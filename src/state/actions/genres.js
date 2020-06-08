@@ -10,10 +10,13 @@ import {
   SET_GENRES_TOTAL_COUNT,
   SET_GENRES_INFINITE_LOADING,
   SET_GENRE_SORT,
+  SET_UPDATING_GENRE_ERROR,
+  SET_UPDATING_GENRE_LOADING,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
-import { getGenres } from '../gql'
+import { getGenres, updateGenre as updateGenreMutation } from '../gql'
+import { toast } from 'react-toastify'
 
 export const getAllGenres = () => async (dispatch, getState) => {
   dispatch({ type: SET_GENRE_OPTIONS_ERROR, payload: null })
@@ -156,4 +159,54 @@ export const onSearchUpdate = e => dispatch => {
 export const onSortUpdate = e => dispatch => {
   dispatch({ type: SET_GENRE_SORT, payload: e.target.value })
   dispatch({ type: SET_GENRE_QUERY_UPDATED, payload: true })
+}
+
+export const updateGenre = (code, updatedProperties = {}, onSuccess) => async (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: SET_UPDATING_GENRE_ERROR, payload: null })
+  dispatch({ type: SET_UPDATING_GENRE_LOADING, payload: true })
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const updateGenreResponse = await client
+    .request(updateGenreMutation, {
+      genre: {
+        code,
+        ...updatedProperties,
+      },
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_UPDATING_GENRE_ERROR, payload: null })
+      dispatch({ type: SET_UPDATING_GENRE_LOADING, payload: false })
+    })
+
+  if (updateGenreResponse) {
+    const { updateGenre } = updateGenreResponse
+    let genres = [...getState().genres.genres]
+
+    genres = genres.map(genre =>
+      genre.code === updateGenre.code ? updateGenre : genre
+    )
+
+    dispatch({ type: SET_GENRES, payload: genres })
+    dispatch({ type: SET_UPDATING_GENRE_ERROR, payload: null })
+    dispatch({ type: SET_UPDATING_GENRE_LOADING, payload: false })
+
+    if (onSuccess) {
+      onSuccess()
+    }
+
+    toast.success(`Genre Updated: ${updateGenre.name}`)
+  }
 }

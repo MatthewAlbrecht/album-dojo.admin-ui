@@ -13,14 +13,24 @@ export default function ({
   onChange,
   defaultValue,
   placeholder,
+  col,
+  colSpan,
+  row,
+  required,
+  pattern,
 }) {
   const inputClasses = classnames(
     'textInput-input',
     icon && 'textInput-input_iconActive'
   )
+  const textInputClasses = classnames(
+    'textInput',
+    col && colSpan && `gridItem--${col}span${colSpan}`,
+    row && `gridItem--row${row}`
+  )
 
   return (
-    <div className="textInput">
+    <div className={textInputClasses}>
       {label && (
         <Txt
           className="textInput-label"
@@ -41,6 +51,8 @@ export default function ({
           onChange={onChange}
           placeholder={placeholder}
           defaultValue={defaultValue}
+          required={required}
+          pattern={pattern}
         />
         {icon && (
           <Icon

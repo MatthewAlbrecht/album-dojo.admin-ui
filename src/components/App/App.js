@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
+import Modal from 'react-modal'
 
 import { publicRoutes, privateRoutes } from 'config/routes'
 import Footer from 'components/Footer/Footer'
@@ -11,6 +12,8 @@ import ScrollToTop from 'components/ScrollToTop/ScrollToTop'
 import PrivateLayout from 'Layouts/PrivateLayout/PrivateLayout'
 
 import 'react-toastify/dist/ReactToastify.css'
+
+Modal.setAppElement('#root')
 
 export default function App() {
   return (

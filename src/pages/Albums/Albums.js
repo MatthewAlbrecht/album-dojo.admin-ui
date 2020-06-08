@@ -11,8 +11,10 @@ import Container from 'components/Container/Container'
 import Tier from 'components/Tier/Tier'
 import Box from 'components/Box/Box'
 import Txt from 'components/Txt/Txt'
-import AlbumList from 'components/AlbumList/AlbumList'
+import DataList from 'components/DataList/DataList'
 import ListControls from 'components/ListControls/ListControls'
+import DuplicateActions from 'components/DuplicateActions/DuplicateActions'
+import AlbumRow from 'components/AlbumRow/AlbumRow'
 
 const Albums = () => {
   const dispatch = useDispatch()
@@ -24,6 +26,9 @@ const Albums = () => {
     totalCount,
     isInfiniteLoading,
     hasMore,
+    primaryDuplicate,
+    duplicates,
+    updateAlbumLoading,
   } = useSelector(
     ({
       albums: {
@@ -34,6 +39,9 @@ const Albums = () => {
         totalCount,
         isInfiniteLoading,
         hasMore,
+        primaryDuplicate,
+        duplicates,
+        updateAlbumLoading,
       },
     }) => ({
       albums,
@@ -43,6 +51,9 @@ const Albums = () => {
       totalCount,
       isInfiniteLoading,
       hasMore,
+      primaryDuplicate,
+      duplicates,
+      updateAlbumLoading,
     })
   )
 
@@ -86,7 +97,7 @@ const Albums = () => {
   }
 
   return (
-    <>
+    <section className="albumsPage">
       <Tier classes="underNav">
         <Container>
           <Box classes="bottom6">
@@ -115,15 +126,30 @@ const Albums = () => {
               </Box>
             </Box>
           </Container>
-          <AlbumList
-            albums={albums}
+          <DataList
             isInfiniteLoading={isInfiniteLoading}
             handleInfiniteLoad={handleInfiniteLoad}
             hasMore={hasMore}
-          />
+          >
+            {albums.map(album => (
+              <AlbumRow
+                key={album.id}
+                album={album}
+                primaryDuplicate={primaryDuplicate}
+                duplicates={duplicates}
+              />
+            ))}
+          </DataList>
         </Box>
+        {primaryDuplicate && (
+          <DuplicateActions
+            updateAlbumLoading={updateAlbumLoading}
+            primaryDuplicate={primaryDuplicate}
+            duplicates={duplicates}
+          />
+        )}
       </Tier>
-    </>
+    </section>
   )
 }
 

@@ -18,6 +18,7 @@
     "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-infinite": "^0.13.0",
+    "react-modal": "^3.11.2",
     "react-oauth-popup": "^0.1.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",

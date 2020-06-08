@@ -9,6 +9,10 @@ import {
   SET_ALBUM_SORT,
   SET_UPDATING_ALBUM_ERROR,
   SET_UPDATING_ALBUM_LOADING,
+  SET_PRIMARY_DUPLICATE,
+  SET_DUPLICATES,
+  SET_ALBUM_SHOW_DUPLICATES,
+  SET_ALBUM_SHOW_INACTIVE,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
@@ -118,6 +122,16 @@ export const onSortUpdate = e => dispatch => {
   dispatch({ type: SET_ALBUM_QUERY_UPDATED, payload: true })
 }
 
+export const onShowDuplicatesUpdate = e => dispatch => {
+  dispatch({ type: SET_ALBUM_SHOW_DUPLICATES, payload: e.target.checked })
+  dispatch({ type: SET_ALBUM_QUERY_UPDATED, payload: true })
+}
+
+export const onShowInactiveUpdate = e => dispatch => {
+  dispatch({ type: SET_ALBUM_SHOW_INACTIVE, payload: e.target.checked })
+  dispatch({ type: SET_ALBUM_QUERY_UPDATED, payload: true })
+}
+
 export const updateAlbum = (id, updatedProperties = {}, onSuccess) => async (
   dispatch,
   getState
@@ -133,7 +147,7 @@ export const updateAlbum = (id, updatedProperties = {}, onSuccess) => async (
     },
   })
 
-  const albumUpdateResponse = await client
+  const updateAlbumResponse = await client
     .request(updateAlbumMutation, {
       album: {
         id,
@@ -148,21 +162,60 @@ export const updateAlbum = (id, updatedProperties = {}, onSuccess) => async (
       dispatch({ type: SET_UPDATING_ALBUM_LOADING, payload: false })
     })
 
-  if (albumUpdateResponse) {
-    const { updateAlbum } = albumUpdateResponse
+  if (updateAlbumResponse) {
+    const { updateAlbum } = updateAlbumResponse
     let albums = [...getState().albums.albums]
+
     albums = albums.map(album =>
       album.id === updateAlbum.id ? updateAlbum : album
     )
+
     dispatch({ type: SET_ALBUMS, payload: albums })
     dispatch({ type: SET_UPDATING_ALBUM_ERROR, payload: null })
     dispatch({ type: SET_UPDATING_ALBUM_LOADING, payload: false })
-    onSuccess()
-    console.log('updateAlbum ==='.toUpperCase(), updateAlbum)
+
+    if (onSuccess) {
+      onSuccess()
+    }
+
     toast.success(
       `Album Updated: ${updateAlbum.name} by ${updateAlbum.artists
         .map(artist => artist.name)
         .join(', ')}`
     )
   }
+}
+
+export const setPrimaryDuplicate = id => dispatch => {
+  dispatch({ type: SET_PRIMARY_DUPLICATE, payload: id })
+}
+
+export const resetDuplicateProperties = removeDuplicates => (
+  dispatch,
+  getState
+) => {
+  const { albums, duplicates, showDuplicates } = getState().albums
+  if (removeDuplicates && !showDuplicates) {
+    const newAlbums = [
+      ...albums.filter(album => !duplicates.includes(album.id)),
+    ]
+    dispatch({ type: SET_ALBUMS, payload: newAlbums })
+  }
+  dispatch({ type: SET_PRIMARY_DUPLICATE, payload: null })
+  dispatch({ type: SET_DUPLICATES, payload: [] })
+}
+
+export const setDuplicate = id => (dispatch, getState) => {
+  let { duplicates, primaryDuplicate } = getState().albums
+  if (primaryDuplicate === id) {
+    return
+  }
+
+  duplicates = [...duplicates]
+  if (duplicates.includes(id)) {
+    duplicates.splice(duplicates.indexOf(id), 1)
+  } else {
+    duplicates.push(id)
+  }
+  dispatch({ type: SET_DUPLICATES, payload: duplicates })
 }

@@ -23,6 +23,10 @@
   top: 0.2rem;
 }
 
+.icon_nudgeDown1 {
+  top: 0.1rem;
+}
+
 .icon_selectDropdown {
   height: 1.4rem;
   width: 0.9rem;
@@ -63,6 +67,12 @@
   .primaryFill {
     fill: $COLOR_GREY;
     transition: fill 0.15s $EASEINOUT_QUAD;
+  }
+}
+
+.icon_plus {
+  .primaryFill {
+    fill: $COLOR_LIGHTEST;
   }
 }
 
