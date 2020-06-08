@@ -38,3 +38,12 @@ export const updateUser = print(gql`
     }
   }
 `)
+
+export const createUser = print(gql`
+  mutation createUser($user: UserInputTypeCreate!) {
+    createUser(user: $user) {
+      username
+      email
+    }
+  }
+`)

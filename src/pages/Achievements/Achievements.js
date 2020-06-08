@@ -7,6 +7,7 @@ import {
   onSortUpdate,
   queryNextAchievements,
 } from 'state/actions/achievements'
+import { codeSortOptions } from 'config/sorts'
 import Container from 'components/Container/Container'
 import Tier from 'components/Tier/Tier'
 import Box from 'components/Box/Box'
@@ -14,21 +15,8 @@ import Txt from 'components/Txt/Txt'
 import AchievementRow from 'components/AchievementRow/AchievementRow'
 import DataList from 'components/DataList/DataList'
 import ListControls from 'components/ListControls/ListControls'
-import Btn from 'components/Btn/Btn'
-import Icon from 'components/Icon/Icon'
 import AddAchievementModal from 'components/AddAchievementModal/AddAchievementModal'
-import ModalContainer from 'components/ModalContainer/ModalContainer'
-
-const sortOptions = [
-  { label: 'Date Added: New to Old', value: 'createdAt:DESC' },
-  { label: 'Date Added: Old to New', value: 'createdAt:ASC' },
-  { label: 'Name: A to Z', value: 'name:ASC' },
-  { label: 'Name: Z to A', value: 'name:DESC' },
-  { label: 'Code: A to Z', value: 'code:ASC' },
-  { label: 'Code: Z to A', value: 'code:DESC' },
-  { label: 'Last Updated: New to Old', value: 'updatedAt:DESC' },
-  { label: 'Last Updated: Old to New', value: 'updatedAt:ASC' },
-]
+import ListHeader from 'components/ListHeader/ListHeader'
 
 const Achievements = () => {
   const dispatch = useDispatch()
@@ -91,36 +79,20 @@ const Achievements = () => {
     <section className="achievementsPage">
       <Tier classes="underNav">
         <Container>
-          <div className="display_flex flexJustifier_spaceBetween">
-            <Box classes="bottom6">
-              <Txt
-                tag="h1"
-                size="24"
-                bold
-                color="DefaultCopy"
-                content="Achievements"
-              />
-            </Box>
-            <Btn
-              circle
-              className="achievementsPage-addButton"
-              onClick={() => setIsOpen(true)}
-              content={<Icon type="Plus" classes="plus nudgeDown1 20" />}
-            ></Btn>
-            <ModalContainer
-              modalIsOpen={modalIsOpen}
-              setIsOpen={setIsOpen}
-              afterOpenModal={() => console.log('HERE')}
-            >
+          <ListHeader
+            modalIsOpen={modalIsOpen}
+            setIsOpen={setIsOpen}
+            heading="Achievements"
+            modal={
               <AddAchievementModal setIsOpen={setIsOpen}></AddAchievementModal>
-            </ModalContainer>
-          </div>
+            }
+          />
           <ListControls
             onSearchUpdate={handleSearchUpdate}
             onSortUpdate={handleSortUpdate}
             onFormSubmit={handleFormSubmit}
             searchDefault={searchTerm}
-            sortOptions={sortOptions}
+            sortOptions={codeSortOptions}
             sortDefault={sortValue}
           />
         </Container>

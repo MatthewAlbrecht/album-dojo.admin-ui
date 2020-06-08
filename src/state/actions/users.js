@@ -9,11 +9,17 @@ import {
   SET_USER_SORT,
   SET_UPDATING_USER_ERROR,
   SET_UPDATING_USER_LOADING,
+  SET_CREATE_USER_ERROR,
+  SET_CREATE_USER_LOADING,
 } from '../types/actions'
 
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
-import { getUsers, updateUser as updateUserMutation } from '../gql'
+import {
+  getUsers,
+  updateUser as updateUserMutation,
+  createUser as createUserMutation,
+} from '../gql'
 import { toast } from 'react-toastify'
 
 export const queryUsers = () => async (dispatch, getState) => {
@@ -164,5 +170,43 @@ export const updateUser = (id, updatedProperties = {}, onSuccess) => async (
     }
 
     toast.success(`User Updated: ${updateUser.name}`)
+  }
+}
+
+export const createUser = (user, onSuccess) => async (dispatch, getState) => {
+  dispatch({ type: SET_CREATE_USER_ERROR, payload: null })
+  dispatch({ type: SET_CREATE_USER_LOADING, payload: true })
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const createUserResponse = await client
+    .request(createUserMutation, {
+      user,
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_CREATE_USER_ERROR, payload: null })
+      dispatch({ type: SET_CREATE_USER_LOADING, payload: false })
+    })
+
+  if (createUserResponse) {
+    const { createUser } = createUserResponse
+
+    dispatch({ type: SET_CREATE_USER_ERROR, payload: null })
+    dispatch({ type: SET_CREATE_USER_LOADING, payload: false })
+
+    if (onSuccess) {
+      onSuccess()
+    }
+
+    toast.success(`User Created: ${createUser.email}`)
   }
 }

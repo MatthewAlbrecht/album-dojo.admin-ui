@@ -10,7 +10,7 @@ export default function RoleRow({ role }) {
   return (
     <li className="roleRow" onClick={handleRowClick}>
       <Txt
-        className="roleRow-code"
+        className="roleRow-name"
         tag="p"
         size="18"
         color="DefaultCopy"

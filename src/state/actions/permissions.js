@@ -9,12 +9,15 @@ import {
   SET_PERMISSION_SORT,
   SET_UPDATING_PERMISSION_ERROR,
   SET_UPDATING_PERMISSION_LOADING,
+  SET_CREATE_PERMISSION_ERROR,
+  SET_CREATE_PERMISSION_LOADING,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
 import {
   getPermissions,
   updatePermission as updatePermissionMutation,
+  createPermission as createPermissionMutation,
 } from '../gql'
 import { toast } from 'react-toastify'
 
@@ -172,5 +175,46 @@ export const updatePermission = (
     }
 
     toast.success(`Permission Updated: ${updatePermission.name}`)
+  }
+}
+
+export const createPermission = (permission, onSuccess) => async (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: SET_CREATE_PERMISSION_ERROR, payload: null })
+  dispatch({ type: SET_CREATE_PERMISSION_LOADING, payload: true })
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const createPermissionResponse = await client
+    .request(createPermissionMutation, {
+      permission,
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_CREATE_PERMISSION_ERROR, payload: null })
+      dispatch({ type: SET_CREATE_PERMISSION_LOADING, payload: false })
+    })
+
+  if (createPermissionResponse) {
+    const { createPermission } = createPermissionResponse
+
+    dispatch({ type: SET_CREATE_PERMISSION_ERROR, payload: null })
+    dispatch({ type: SET_CREATE_PERMISSION_LOADING, payload: false })
+
+    if (onSuccess) {
+      onSuccess()
+    }
+
+    toast.success(`Permission Created: ${createPermission.name}`)
   }
 }

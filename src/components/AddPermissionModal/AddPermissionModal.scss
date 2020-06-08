@@ -1,13 +1,6 @@
 /* ---------------------------------------------
- Achievements Page
+ Add Permission Modal
 --------------------------------------------- */
-
-.achievementsPage-addButton {
-  transition: transform 0.2s $EASEOUT_QUAD;
-  &:hover {
-    transform: scale(1.08);
-  }
-}
 
 @include breakpoint(breakpoint-size(md)) {
 }

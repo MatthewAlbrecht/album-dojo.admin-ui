@@ -2,6 +2,12 @@
  Select Dropdown
 --------------------------------------------- */
 
+.selectDropdown-label {
+  padding-bottom: 0.4rem;
+  padding-left: 0.4rem;
+  display: block;
+}
+
 .selectDropdown-select {
   border: 0.1rem solid $COLOR_GREY_LIGHT;
   padding: 0.9rem rhythm(2);
@@ -9,8 +15,8 @@
   border-radius: $BORDER_RADIUS;
   font-family: $FONT_FAMILY_PRIMARY;
 
-  &_iconActive {
-    padding-right: rhythm(5);
+  &--fullWidth {
+    width: 100%;
   }
 }
 

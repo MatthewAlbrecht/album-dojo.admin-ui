@@ -1,4 +1,7 @@
 import React from 'react'
+import cn from 'classnames'
+
+import Txt from 'components/Txt/Txt'
 
 export default function SelectDropdown({
   options,
@@ -7,12 +10,29 @@ export default function SelectDropdown({
   label,
   onChange,
   defaultValue,
+  fullWidth,
+  className,
 }) {
+  const elementClasses = cn('selectDropdown', className)
+  const selectClasses = cn(
+    'selectDropdown-select',
+    fullWidth && 'selectDropdown-select--fullWidth'
+  )
   return (
-    <div className="selectDropdown">
-      {label && <label htmlFor={id}>{label}</label>}
+    <div className={elementClasses}>
+      {label && (
+        <Txt
+          className="selectDropdown-label"
+          htmlFor={id}
+          content={label}
+          tag="label"
+          semibold
+          color="Grey"
+          size="14"
+        />
+      )}
       <select
-        className="selectDropdown-select"
+        className={selectClasses}
         name={name}
         id={id}
         onChange={onChange}

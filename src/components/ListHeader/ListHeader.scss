@@ -1,9 +1,12 @@
 /* ---------------------------------------------
- List Controls
+ List Header
 --------------------------------------------- */
-.listControls-sortDropdown {
-  max-width: 22.8rem;
-  margin-left: auto;
+
+.listHeader-addButton {
+  transition: transform 0.2s $EASEOUT_QUAD;
+  &:hover {
+    transform: scale(1.08);
+  }
 }
 
 @include breakpoint(breakpoint-size(md)) {

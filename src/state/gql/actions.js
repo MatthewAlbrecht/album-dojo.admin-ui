@@ -40,3 +40,12 @@ export const updateAction = print(gql`
     }
   }
 `)
+
+export const createAction = print(gql`
+  mutation createAction($action: ActionInputTypeCreate!) {
+    createAction(action: $action) {
+      code
+      name
+    }
+  }
+`)

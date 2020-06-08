@@ -2,13 +2,6 @@
  Add Achievement Modal
 --------------------------------------------- */
 
-.addAchievement-formFields {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  row-gap: rhythm(2);
-  column-gap: rhythm(2);
-}
-
 @include breakpoint(breakpoint-size(md)) {
 }
 

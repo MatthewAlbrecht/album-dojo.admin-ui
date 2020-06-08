@@ -9,10 +9,16 @@ import {
   SET_ROLE_SORT,
   SET_UPDATING_ROLE_ERROR,
   SET_UPDATING_ROLE_LOADING,
+  SET_CREATE_ROLE_ERROR,
+  SET_CREATE_ROLE_LOADING,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
-import { getRoles, updateRole as updateRoleMutation } from '../gql'
+import {
+  getRoles,
+  updateRole as updateRoleMutation,
+  createRole as createRoleMutation,
+} from '../gql'
 import { toast } from 'react-toastify'
 
 export const queryRoles = () => async (dispatch, getState) => {
@@ -166,5 +172,43 @@ export const updateRole = (id, updatedProperties = {}, onSuccess) => async (
     }
 
     toast.success(`Role Updated: ${updateRole.name}`)
+  }
+}
+
+export const createRole = (role, onSuccess) => async (dispatch, getState) => {
+  dispatch({ type: SET_CREATE_ROLE_ERROR, payload: null })
+  dispatch({ type: SET_CREATE_ROLE_LOADING, payload: true })
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const createRoleResponse = await client
+    .request(createRoleMutation, {
+      role,
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_CREATE_ROLE_ERROR, payload: null })
+      dispatch({ type: SET_CREATE_ROLE_LOADING, payload: false })
+    })
+
+  if (createRoleResponse) {
+    const { createRole } = createRoleResponse
+
+    dispatch({ type: SET_CREATE_ROLE_ERROR, payload: null })
+    dispatch({ type: SET_CREATE_ROLE_LOADING, payload: false })
+
+    if (onSuccess) {
+      onSuccess()
+    }
+
+    toast.success(`Role Created: ${createRole.name}`)
   }
 }

@@ -10,7 +10,7 @@ export default function PermissionRow({ permission }) {
   return (
     <li className="permissionRow" onClick={handleRowClick}>
       <Txt
-        className="permissionRow-code"
+        className="permissionRow-name"
         tag="p"
         size="18"
         color="DefaultCopy"

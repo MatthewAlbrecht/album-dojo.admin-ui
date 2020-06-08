@@ -34,3 +34,11 @@ export const updateGenre = print(gql`
     }
   }
 `)
+
+export const createGenre = print(gql`
+  mutation createGenre($genre: GenreInputTypeCreate!) {
+    createGenre(genre: $genre) {
+      name
+    }
+  }
+`)

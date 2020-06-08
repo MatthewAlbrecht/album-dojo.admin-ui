@@ -22,6 +22,10 @@
   &_iconActive {
     padding-right: rhythm(5);
   }
+
+  &::placeholder {
+    color: $COLOR_GREY_LIGHT;
+  }
 }
 
 .textBox-inputContainer {

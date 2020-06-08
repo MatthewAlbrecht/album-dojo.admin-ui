@@ -36,3 +36,12 @@ export const updateRole = print(gql`
     }
   }
 `)
+
+export const createRole = print(gql`
+  mutation createRole($role: RoleInputTypeCreate!) {
+    createRole(role: $role) {
+      name
+      description
+    }
+  }
+`)

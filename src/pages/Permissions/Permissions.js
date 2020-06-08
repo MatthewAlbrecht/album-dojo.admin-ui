@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -7,6 +7,7 @@ import {
   onSortUpdate,
   queryNextPermissions,
 } from 'state/actions/permissions'
+import { nameSortOptions } from 'config/sorts'
 import Container from 'components/Container/Container'
 import Tier from 'components/Tier/Tier'
 import Box from 'components/Box/Box'
@@ -14,9 +15,12 @@ import Txt from 'components/Txt/Txt'
 import PermissionRow from 'components/PermissionRow/PermissionRow'
 import DataList from 'components/DataList/DataList'
 import ListControls from 'components/ListControls/ListControls'
+import ListHeader from 'components/ListHeader/ListHeader'
+import AddPermissionModal from 'components/AddPermissionModal/AddPermissionModal'
 
 const Permissions = () => {
   const dispatch = useDispatch()
+  const [modalIsOpen, setIsOpen] = useState(false)
   const {
     permissions,
     searchTerm,
@@ -47,15 +51,6 @@ const Permissions = () => {
     })
   )
 
-  const sortOptions = [
-    { label: 'Date Added: New to Old', value: 'createdAt:DESC' },
-    { label: 'Date Added: Old to New', value: 'createdAt:ASC' },
-    { label: 'Name: A to Z', value: 'name:ASC' },
-    { label: 'Name: Z to A', value: 'name:DESC' },
-    { label: 'Last Updated: New to Old', value: 'updatedAt:DESC' },
-    { label: 'Last Updated: Old to New', value: 'updatedAt:ASC' },
-  ]
-
   const handleFormSubmit = e => {
     e.preventDefault()
     if (queryUpdated) {
@@ -84,21 +79,20 @@ const Permissions = () => {
     <section className="permissionsPage">
       <Tier classes="underNav">
         <Container>
-          <Box classes="bottom6">
-            <Txt
-              tag="h1"
-              size="24"
-              bold
-              color="DefaultCopy"
-              content="Permissions"
-            />
-          </Box>
+          <ListHeader
+            modalIsOpen={modalIsOpen}
+            setIsOpen={setIsOpen}
+            heading="Permissions"
+            modal={
+              <AddPermissionModal setIsOpen={setIsOpen}></AddPermissionModal>
+            }
+          />
           <ListControls
             onSearchUpdate={handleSearchUpdate}
             onSortUpdate={handleSortUpdate}
             onFormSubmit={handleFormSubmit}
             searchDefault={searchTerm}
-            sortOptions={sortOptions}
+            sortOptions={nameSortOptions}
             sortDefault={sortValue}
           />
         </Container>

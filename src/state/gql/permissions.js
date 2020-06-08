@@ -36,3 +36,12 @@ export const updatePermission = print(gql`
     }
   }
 `)
+
+export const createPermission = print(gql`
+  mutation createPermission($permission: PermissionInputTypeCreate!) {
+    createPermission(permission: $permission) {
+      name
+      description
+    }
+  }
+`)

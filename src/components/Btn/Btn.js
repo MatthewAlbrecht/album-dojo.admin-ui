@@ -38,7 +38,7 @@ export default class Btn extends Component {
 }
 
 Btn.propTypes = {
-  content: PropTypes.string,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   type: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,

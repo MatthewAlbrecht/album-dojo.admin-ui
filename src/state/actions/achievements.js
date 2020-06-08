@@ -201,7 +201,7 @@ export const createAchievement = (achievement, onSuccess) => async (
     },
   })
 
-  const updateAchievementResponse = await client
+  const createAchievementResponse = await client
     .request(createAchievementMutation, {
       achievement,
     })
@@ -213,11 +213,11 @@ export const createAchievement = (achievement, onSuccess) => async (
       dispatch({ type: SET_CREATE_ACHIEVEMENT_LOADING, payload: false })
     })
 
-  if (updateAchievementResponse) {
-    const { createAchievement } = updateAchievementResponse
+  if (createAchievementResponse) {
+    const { createAchievement } = createAchievementResponse
 
-    dispatch({ type: SET_UPDATING_ACHIEVEMENT_ERROR, payload: null })
-    dispatch({ type: SET_UPDATING_ACHIEVEMENT_LOADING, payload: false })
+    dispatch({ type: SET_CREATE_ACHIEVEMENT_ERROR, payload: null })
+    dispatch({ type: SET_CREATE_ACHIEVEMENT_LOADING, payload: false })
 
     if (onSuccess) {
       onSuccess()

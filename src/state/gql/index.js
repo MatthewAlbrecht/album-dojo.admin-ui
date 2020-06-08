@@ -6,8 +6,12 @@ export {
   updateAchievement,
   createAchievement,
 } from './achievements'
-export { getActions, updateAction } from './actions'
-export { getGenres, updateGenre } from './genres'
-export { getPermissions, updatePermission } from './permissions'
-export { getRoles, updateRole } from './roles'
-export { getUsers, updateUser } from './users'
+export { getActions, updateAction, createAction } from './actions'
+export { getGenres, updateGenre, createGenre } from './genres'
+export {
+  getPermissions,
+  updatePermission,
+  createPermission,
+} from './permissions'
+export { getRoles, updateRole, createRole } from './roles'
+export { getUsers, updateUser, createUser } from './users'

@@ -16,8 +16,22 @@
   $num-columns: $grid-num-columns,
   $gutter: $grid-gutter-width
 ) {
-  .grid {
-    grid-gap: $gutter;
+  @for $gridGap from 0 through 4 {
+    .grid--gap#{$gridGap}#{$breakpoint} {
+      grid-gap: rhythm($gridGap);
+    }
+  }
+
+  @for $gridRowGap from 0 through 4 {
+    .grid--rowGap#{$gridRowGap}#{$breakpoint} {
+      row-gap: rhythm($gridRowGap);
+    }
+  }
+
+  @for $gridColGap from 0 through 4 {
+    .grid--colGap#{$gridColGap}#{$breakpoint} {
+      column-gap: rhythm($gridColGap);
+    }
   }
 
   @for $gridColIndex from 1 through $num-columns {

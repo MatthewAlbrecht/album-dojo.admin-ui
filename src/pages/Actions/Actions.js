@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -7,6 +7,7 @@ import {
   onSortUpdate,
   queryNextActions,
 } from 'state/actions/actions'
+import { codeSortOptions } from 'config/sorts'
 import Container from 'components/Container/Container'
 import Tier from 'components/Tier/Tier'
 import Box from 'components/Box/Box'
@@ -14,9 +15,12 @@ import Txt from 'components/Txt/Txt'
 import ActionRow from 'components/ActionRow/ActionRow'
 import DataList from 'components/DataList/DataList'
 import ListControls from 'components/ListControls/ListControls'
+import AddActionModal from 'components/AddActionModal/AddActionModal'
+import ListHeader from 'components/ListHeader/ListHeader'
 
 const Actions = () => {
   const dispatch = useDispatch()
+  const [modalIsOpen, setIsOpen] = useState(false)
   const {
     actions,
     searchTerm,
@@ -47,17 +51,6 @@ const Actions = () => {
     })
   )
 
-  const sortOptions = [
-    { label: 'Date Added: New to Old', value: 'createdAt:DESC' },
-    { label: 'Date Added: Old to New', value: 'createdAt:ASC' },
-    { label: 'Name: A to Z', value: 'name:ASC' },
-    { label: 'Name: Z to A', value: 'name:DESC' },
-    { label: 'Code: A to Z', value: 'code:ASC' },
-    { label: 'Code: Z to A', value: 'code:DESC' },
-    { label: 'Last Updated: New to Old', value: 'updatedAt:DESC' },
-    { label: 'Last Updated: Old to New', value: 'updatedAt:ASC' },
-  ]
-
   const handleFormSubmit = e => {
     e.preventDefault()
     if (queryUpdated) {
@@ -86,21 +79,18 @@ const Actions = () => {
     <section className="actionsPage">
       <Tier classes="underNav">
         <Container>
-          <Box classes="bottom6">
-            <Txt
-              tag="h1"
-              size="24"
-              bold
-              color="DefaultCopy"
-              content="Actions"
-            />
-          </Box>
+          <ListHeader
+            modalIsOpen={modalIsOpen}
+            setIsOpen={setIsOpen}
+            heading="Actions"
+            modal={<AddActionModal setIsOpen={setIsOpen}></AddActionModal>}
+          />
           <ListControls
             onSearchUpdate={handleSearchUpdate}
             onSortUpdate={handleSortUpdate}
             onFormSubmit={handleFormSubmit}
             searchDefault={searchTerm}
-            sortOptions={sortOptions}
+            sortOptions={codeSortOptions}
             sortDefault={sortValue}
           />
         </Container>

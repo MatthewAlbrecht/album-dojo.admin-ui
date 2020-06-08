@@ -10,12 +10,21 @@ export default function UserRow({ user }) {
   return (
     <li className="userRow" onClick={handleRowClick}>
       <Txt
-        className="userRow-code"
+        className="userRow-email"
         tag="p"
         size="18"
         color="DefaultCopy"
         content={user.email}
       />
+      {user.username && (
+        <Txt
+          className="userRow-username"
+          tag="span"
+          size="16"
+          color="Grey"
+          content={user.username}
+        />
+      )}
     </li>
   )
 }

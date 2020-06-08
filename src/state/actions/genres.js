@@ -12,10 +12,16 @@ import {
   SET_GENRE_SORT,
   SET_UPDATING_GENRE_ERROR,
   SET_UPDATING_GENRE_LOADING,
+  SET_CREATE_GENRE_ERROR,
+  SET_CREATE_GENRE_LOADING,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
-import { getGenres, updateGenre as updateGenreMutation } from '../gql'
+import {
+  getGenres,
+  updateGenre as updateGenreMutation,
+  createGenre as createGenreMutation,
+} from '../gql'
 import { toast } from 'react-toastify'
 
 export const getAllGenres = () => async (dispatch, getState) => {
@@ -208,5 +214,43 @@ export const updateGenre = (code, updatedProperties = {}, onSuccess) => async (
     }
 
     toast.success(`Genre Updated: ${updateGenre.name}`)
+  }
+}
+
+export const createGenre = (genre, onSuccess) => async (dispatch, getState) => {
+  dispatch({ type: SET_CREATE_GENRE_ERROR, payload: null })
+  dispatch({ type: SET_CREATE_GENRE_LOADING, payload: true })
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const createGenreResponse = await client
+    .request(createGenreMutation, {
+      genre,
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_CREATE_GENRE_ERROR, payload: null })
+      dispatch({ type: SET_CREATE_GENRE_LOADING, payload: false })
+    })
+
+  if (createGenreResponse) {
+    const { createGenre } = createGenreResponse
+
+    dispatch({ type: SET_CREATE_GENRE_ERROR, payload: null })
+    dispatch({ type: SET_CREATE_GENRE_LOADING, payload: false })
+
+    if (onSuccess) {
+      onSuccess()
+    }
+
+    toast.success(`Genre Created: ${createGenre.name}`)
   }
 }
