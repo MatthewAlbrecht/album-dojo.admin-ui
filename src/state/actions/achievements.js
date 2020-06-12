@@ -11,10 +11,14 @@ import {
   SET_UPDATING_ACHIEVEMENT_LOADING,
   SET_CREATE_ACHIEVEMENT_ERROR,
   SET_CREATE_ACHIEVEMENT_LOADING,
+  SET_ACHIEVEMENT,
+  SET_ACHIEVEMENT_LOADING,
+  SET_ACHIEVEMENT_ERROR,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
 import {
+  getAchievement,
   getAchievements,
   updateAchievement as updateAchievementMutation,
   createAchievement as createAchievementMutation,
@@ -134,6 +138,7 @@ export const updateAchievement = (
   updatedProperties = {},
   onSuccess
 ) => async (dispatch, getState) => {
+  console.log('code ==='.toUpperCase(), code)
   dispatch({ type: SET_UPDATING_ACHIEVEMENT_ERROR, payload: null })
   dispatch({ type: SET_UPDATING_ACHIEVEMENT_LOADING, payload: true })
   const {
@@ -225,4 +230,44 @@ export const createAchievement = (achievement, onSuccess) => async (
 
     toast.success(`Achievement Created: ${createAchievement.name}`)
   }
+}
+
+export const findAchievement = code => async (dispatch, getState) => {
+  dispatch({ type: SET_ACHIEVEMENT, payload: [] })
+  dispatch({ type: SET_ACHIEVEMENT_LOADING, payload: true })
+  dispatch({ type: SET_ACHIEVEMENT_ERROR, payload: null })
+
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const achievementResponse = await client
+    .request(getAchievement, {
+      code,
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_ACHIEVEMENT_LOADING, payload: false })
+      dispatch({ type: SET_ACHIEVEMENT_ERROR, payload: error })
+    })
+
+  if (achievementResponse) {
+    const { achievement } = achievementResponse
+    dispatch({
+      type: SET_ACHIEVEMENT,
+      payload: achievement.achievements[0] || {},
+    })
+    dispatch({ type: SET_ACHIEVEMENT_LOADING, payload: false })
+  }
+}
+
+export const resetAchievement = () => async dispatch => {
+  dispatch({ type: SET_ACHIEVEMENT, payload: {} })
 }

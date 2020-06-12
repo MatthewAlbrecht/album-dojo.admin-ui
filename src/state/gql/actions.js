@@ -29,6 +29,38 @@ export const getActions = print(gql`
   }
 `)
 
+export const getAction = print(gql`
+  query getActions($code: String) {
+    action(pageSize: 1, code: $code) {
+      hasMore
+      cursor
+      totalCount
+      actions {
+        code
+        name
+        description
+        level
+        points
+        achievementCode
+        achievement {
+          code
+          name
+          description
+          level
+          imageUrl
+        }
+        relatedActions {
+          code
+          name
+          description
+          points
+          level
+        }
+      }
+    }
+  }
+`)
+
 export const updateAction = print(gql`
   mutation updateAction($action: ActionInputTypeUpdate!) {
     updateAction(action: $action) {

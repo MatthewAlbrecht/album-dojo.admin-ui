@@ -138,8 +138,11 @@ export default function configureStore(initialState = {}) {
     persistedState || initialState,
     compose(
       applyMiddleware(thunk),
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
+      (window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        window.__REDUX_DEVTOOLS_EXTENSION__()) ||
+        function (x) {
+          return x
+        }
     )
   )
 

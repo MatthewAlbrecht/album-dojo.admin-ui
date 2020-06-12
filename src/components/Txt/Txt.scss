@@ -13,7 +13,7 @@
 // TXT SIZES
 // ------------------------------------
 
-$text-sizes: 10 12 14 16 18 20 24 26 28 32 38 40 50 80;
+$text-sizes: 10 11 12 14 16 18 20 24 26 28 32 38 40 50 80;
 
 @mixin createTextSizes($resolution: '') {
   @each $text-size in $text-sizes {
@@ -96,6 +96,10 @@ $text-sizes: 10 12 14 16 18 20 24 26 28 32 38 40 50 80;
 
 .txt_space1 {
   letter-spacing: 0.1rem;
+}
+
+.txt_space2 {
+  letter-spacing: 0.2rem;
 }
 
 // ------------------------------------

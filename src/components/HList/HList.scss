@@ -27,6 +27,7 @@
 
 @include createHList(1);
 @include createHList(2);
+@include createHList(3);
 
 @include breakpoint(breakpoint_size('md')) {
   .hList_vertMd > * {

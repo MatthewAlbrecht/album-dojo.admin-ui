@@ -38,6 +38,14 @@ $box-sizes: 0 1 2 3 4 5 6 7 8 9 10;
   padding-left: rhythm(0.5);
 }
 
+.box_top0_5 {
+  padding-top: rhythm(0.5);
+}
+
+.box_bottom0_5 {
+  padding-bottom: rhythm(0.5);
+}
+
 @mixin createBoxDimensions($resolution: '') {
   @each $box-size in $box-sizes {
     .box_ {

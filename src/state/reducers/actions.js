@@ -12,9 +12,13 @@ import {
   SET_CREATE_ACTION_ERROR,
   SET_CREATE_ACTION_LOADING,
   LOGOUT_USER,
+  SET_ACTION,
+  SET_ACTION_LOADING,
+  SET_ACTION_ERROR,
 } from '../types/actions'
 
 const initialState = {
+  action: {},
   actions: [],
   sortValue: 'code:ASC',
   sortUpdated: false,
@@ -47,6 +51,13 @@ export default (state = initialState, action) => {
       return { ...state, createActionLoading: action.payload }
     case SET_ACTION_SORT:
       return { ...state, sortValue: action.payload }
+    case SET_ACTION:
+      return { ...state, action: action.payload }
+    case SET_ACTION_LOADING:
+      return { ...state, actionLoading: action.payload }
+    case SET_ACTION_ERROR:
+      return { ...state, actionError: action.payload }
+
     case LOGOUT_USER:
       return { ...initialState }
     default:

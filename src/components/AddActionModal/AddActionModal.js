@@ -1,16 +1,22 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { createAction } from 'state/actions/actions'
+import { createAction, updateAction } from 'state/actions/actions'
 import Txt from 'components/Txt/Txt'
 import TextInput from 'components/TextInput/TextInput'
 import TextBox from 'components/TextBox/TextBox'
 import Box from 'components/Box/Box'
 import Btn from 'components/Btn/Btn'
 
-export default function AddActionModal({ setIsOpen }) {
+export default function AddActionModal({
+  setIsOpen,
+  defaultValues = {},
+  isEdit,
+}) {
   const dispatch = useDispatch()
   const { createActionLoading } = useSelector(state => state.actions)
+  const headerContent = isEdit ? 'Edit Action' : 'Create New Action'
+
   function handleAddActionSubmit(e) {
     e.preventDefault()
     const action = {
@@ -22,12 +28,16 @@ export default function AddActionModal({ setIsOpen }) {
       achievementCode: e.target.achievementCode.value || null,
     }
     console.log('action ==='.toUpperCase(), action)
-    dispatch(createAction(action, () => setIsOpen(false)))
+    if (isEdit) {
+      dispatch(updateAction(action.code, action, () => setIsOpen(false)))
+    } else {
+      dispatch(createAction(action, () => setIsOpen(false)))
+    }
   }
 
   return (
     <div className="addAction">
-      <Txt tag="h2" size="20" color="DefaultCopy" content="Create New Action" />
+      <Txt tag="h2" size="20" color="DefaultCopy" content={headerContent} />
       <Box classes="top3">
         <form
           onSubmit={handleAddActionSubmit}
@@ -42,6 +52,7 @@ export default function AddActionModal({ setIsOpen }) {
               id="action-code"
               required
               pattern="[A-Z]{2}\d{3}"
+              defaultValue={defaultValues.code}
             />
             <TextInput name="name" label="Name" id="action-name" required />
             <TextBox
@@ -53,22 +64,23 @@ export default function AddActionModal({ setIsOpen }) {
               cols={33}
               col={1}
               colSpan={2}
+              defaultValue={defaultValues.description}
             />
             <TextInput
               type="number"
               name="level"
               label="Level"
-              defaultValue={1}
               id="action-level"
               required
+              defaultValue={defaultValues.level}
             />
             <TextInput
               name="points"
               label="Points"
               id="action-points"
               type="number"
-              defaultValue="10"
               required
+              defaultValue={defaultValues.points}
             />
             <TextInput
               name="achievementCode"
@@ -76,6 +88,7 @@ export default function AddActionModal({ setIsOpen }) {
               id="action-achievementCode"
               placeholder="XX001"
               pattern="[A-Z]{2}\d{3}"
+              defaultValue={defaultValues.achievementCode}
             />
           </div>
           <div className="display_flex flexJustifier_flexEnd">

@@ -7,7 +7,9 @@ import Genres from 'pages/Genres/Genres'
 import Roles from 'pages/Roles/Roles'
 import Permissions from 'pages/Permissions/Permissions'
 import Achievements from 'pages/Achievements/Achievements'
+import Achievement from 'pages/Achievement/Achievement'
 import Actions from 'pages/Actions/Actions'
+import Action from 'pages/Action/Action'
 
 export const publicRoutes = [
   {
@@ -58,8 +60,18 @@ export const privateRoutes = [
     exact: true,
   },
   {
+    path: '/achievements/:code',
+    component: Achievement,
+    exact: true,
+  },
+  {
     path: '/actions',
     component: Actions,
+    exact: true,
+  },
+  {
+    path: '/actions/:code',
+    component: Action,
     exact: true,
   },
 ]

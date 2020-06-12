@@ -1,6 +1,13 @@
 /* ---------------------------------------------
- Component
+ Code Name Header
 --------------------------------------------- */
+
+.codeNameHeader-image {
+  width: rhythm(8);
+  height: rhythm(8);
+  background-color: $COLOR_GREY_LIGHTEST;
+  border-radius: 100%;
+}
 
 @include breakpoint(breakpoint-size(md)) {
 }

@@ -1,0 +1,79 @@
+/* ---------------------------------------------
+ Similar Actions
+--------------------------------------------- */
+
+.similarActions-header {
+  display: flex;
+  padding: rhythm(1) rhythm(2);
+}
+
+.similarActions-table {
+  overflow-y: scroll;
+  max-height: 30rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.similarActions-codeLabel,
+.similarActions-code {
+  width: rhythm(7);
+}
+
+.similarActions-nameLabel,
+.similarActions-name {
+  width: 12rem;
+  padding-left: rhythm(1);
+}
+
+.similarActions-pointsLabel,
+.similarActions-points {
+  width: 7rem;
+  padding-left: rhythm(1);
+}
+
+.similarActions-descriptionLabel,
+.similarActions-description {
+  margin-left: auto;
+  width: 20rem;
+  padding-left: rhythm(1);
+}
+
+.similarActions-item {
+  border-radius: $BORDER_RADIUS;
+
+  &:nth-child(even) {
+    background-color: $COLOR_LIGHTEST;
+    &:hover {
+      background-color: darken($COLOR_LIGHTEST, 7%);
+    }
+    &:active {
+      background-color: darken($COLOR_LIGHTEST, 10%);
+    }
+  }
+
+  &:nth-child(odd) {
+    background-color: $COLOR_GREY_SHELF;
+    &:hover {
+      background-color: darken($COLOR_GREY_SHELF, 7%);
+    }
+    &:active {
+      background-color: darken($COLOR_GREY_SHELF, 10%);
+    }
+  }
+}
+
+.similarActions-link {
+  display: flex;
+  padding: rhythm(1) rhythm(2);
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

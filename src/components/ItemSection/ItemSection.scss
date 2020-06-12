@@ -1,0 +1,27 @@
+/* ---------------------------------------------
+ Item Section
+--------------------------------------------- */
+
+.itemSection {
+  box-shadow: $BOX_SHADOW_SMALL;
+  border-radius: $BORDER_RADIUS;
+  overflow: hidden;
+}
+
+.itemSection-header {
+  background-color: $COLOR_GREY_SHELF;
+  padding: rhythm(1) rhythm(3);
+}
+
+.itemSection-content {
+  padding: rhythm(2) rhythm(3);
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

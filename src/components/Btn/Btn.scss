@@ -22,7 +22,11 @@
   width: auto;
 
   &:active {
-    background-color: $COLOR_GREY;
+    background: linear-gradient(
+      180deg,
+      darken($COLOR_BLUE_LIGHT, 8%),
+      darken($COLOR_BLUE_DARK, 8%)
+    );
   }
 
   &:disabled {
@@ -43,6 +47,21 @@
 .btn_secondary {
   background: $COLOR_LIGHTEST;
   color: $COLOR_DEFAULT_COPY;
+  &:active {
+    background: darken($COLOR_LIGHTEST, 8%);
+  }
+}
+
+.btn_tertiary {
+  background: $COLOR_LIGHTEST;
+  color: $COLOR_DEFAULT_COPY;
+  border: 0.1rem solid $COLOR_GREY_LIGHT;
+  &:active {
+    background: darken($COLOR_LIGHTEST, 8%);
+  }
+  // border: 0.1rem solid transparent;
+  // box-sizing: border-box;
+  // box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .btn_shadow {

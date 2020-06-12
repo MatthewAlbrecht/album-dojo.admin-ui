@@ -11,10 +11,14 @@ import {
   SET_UPDATING_ACTION_LOADING,
   SET_CREATE_ACTION_ERROR,
   SET_CREATE_ACTION_LOADING,
+  SET_ACTION,
+  SET_ACTION_LOADING,
+  SET_ACTION_ERROR,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
 import {
+  getAction,
   getActions,
   updateAction as updateActionMutation,
   createAction as createActionMutation,
@@ -216,4 +220,44 @@ export const createAction = (action, onSuccess) => async (
 
     toast.success(`Action Created: ${createAction.name}`)
   }
+}
+
+export const findAction = code => async (dispatch, getState) => {
+  dispatch({ type: SET_ACTION, payload: [] })
+  dispatch({ type: SET_ACTION_LOADING, payload: true })
+  dispatch({ type: SET_ACTION_ERROR, payload: null })
+
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const actionResponse = await client
+    .request(getAction, {
+      code,
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_ACTION_LOADING, payload: false })
+      dispatch({ type: SET_ACTION_ERROR, payload: error })
+    })
+
+  if (actionResponse) {
+    const { action } = actionResponse
+    dispatch({
+      type: SET_ACTION,
+      payload: action.actions[0] || {},
+    })
+    dispatch({ type: SET_ACTION_LOADING, payload: false })
+  }
+}
+
+export const resetAction = () => async dispatch => {
+  dispatch({ type: SET_ACTION, payload: {} })
 }

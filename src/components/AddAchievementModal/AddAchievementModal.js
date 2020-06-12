@@ -1,16 +1,25 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { createAchievement } from 'state/actions/achievements'
+import {
+  createAchievement,
+  updateAchievement,
+} from 'state/actions/achievements'
 import Txt from 'components/Txt/Txt'
 import TextInput from 'components/TextInput/TextInput'
 import TextBox from 'components/TextBox/TextBox'
 import Box from 'components/Box/Box'
 import Btn from 'components/Btn/Btn'
 
-export default function AddAchievementModal({ setIsOpen }) {
+export default function AddAchievementModal({
+  setIsOpen,
+  defaultValues = {},
+  isEdit,
+}) {
   const dispatch = useDispatch()
   const { createAchievementLoading } = useSelector(state => state.achievements)
+  const headerContent = isEdit ? 'Edit Achievement' : 'Create New Achievement'
+
   function handleAddAchievementSubmit(e) {
     e.preventDefault()
     const achievement = {
@@ -21,17 +30,19 @@ export default function AddAchievementModal({ setIsOpen }) {
       imageUrl: e.target.imageUrl.value || null,
     }
     console.log('achievement ==='.toUpperCase(), achievement)
-    dispatch(createAchievement(achievement, () => setIsOpen(false)))
+    console.log('achievement.code ==='.toUpperCase(), achievement.code)
+    if (isEdit) {
+      dispatch(
+        updateAchievement(achievement.code, achievement, () => setIsOpen(false))
+      )
+    } else {
+      dispatch(createAchievement(achievement, () => setIsOpen(false)))
+    }
   }
 
   return (
     <div className="addAchievement">
-      <Txt
-        tag="h2"
-        size="20"
-        color="DefaultCopy"
-        content="Create New Achievement"
-      />
+      <Txt tag="h2" size="20" color="DefaultCopy" content={headerContent} />
       <Box classes="top3">
         <form
           onSubmit={handleAddAchievementSubmit}
@@ -44,6 +55,7 @@ export default function AddAchievementModal({ setIsOpen }) {
               label="Code"
               placeholder="XX001"
               id="achievement-code"
+              defaultValue={defaultValues.code}
               required
               pattern="[A-Z]{2}\d{3}"
             />
@@ -51,6 +63,7 @@ export default function AddAchievementModal({ setIsOpen }) {
               name="name"
               label="Name"
               id="achievement-name"
+              defaultValue={defaultValues.name}
               required
             />
             <TextBox
@@ -58,6 +71,7 @@ export default function AddAchievementModal({ setIsOpen }) {
               label="Description"
               className="addAchievement-descriptionInput"
               id="achievement-description"
+              defaultValue={defaultValues.description}
               rows={5}
               cols={33}
               col={1}
@@ -67,14 +81,15 @@ export default function AddAchievementModal({ setIsOpen }) {
               type="number"
               name="level"
               label="Level"
-              defaultValue={1}
               id="achievement-level"
+              defaultValue={defaultValues.level}
               required
             />
             <TextInput
               name="imageUrl"
               label="Image URL"
               id="achievement-imageUrl"
+              defaultValue={defaultValues.imageUrl}
             />
           </div>
           <div className="display_flex flexJustifier_flexEnd">

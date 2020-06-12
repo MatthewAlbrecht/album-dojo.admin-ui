@@ -1,0 +1,23 @@
+/* ---------------------------------------------
+ Related Action
+--------------------------------------------- */
+
+.relatedAction:hover .relatedAction-name {
+  text-decoration: underline;
+}
+
+.relatedAction-image {
+  height: rhythm(7);
+  width: rhythm(7);
+  background-color: $COLOR_GREY_LIGHTEST;
+  border-radius: 100%;
+}
+
+@include breakpoint(breakpoint-size(md)) {
+}
+
+@include breakpoint(breakpoint-size(lg)) {
+}
+
+@include breakpoint(breakpoint-size(xl)) {
+}

@@ -12,9 +12,13 @@ import {
   SET_CREATE_ACHIEVEMENT_ERROR,
   SET_CREATE_ACHIEVEMENT_LOADING,
   LOGOUT_USER,
+  SET_ACHIEVEMENT,
+  SET_ACHIEVEMENT_LOADING,
+  SET_ACHIEVEMENT_ERROR,
 } from '../types/actions'
 
 const initialState = {
+  achievement: {},
   achievements: [],
   sortValue: 'code:ASC',
   sortUpdated: false,
@@ -47,6 +51,12 @@ export default (state = initialState, action) => {
       return { ...state, createAchievementLoading: action.payload }
     case SET_ACHIEVEMENT_SORT:
       return { ...state, sortValue: action.payload }
+    case SET_ACHIEVEMENT:
+      return { ...state, achievement: action.payload }
+    case SET_ACHIEVEMENT_LOADING:
+      return { ...state, achievementLoading: action.payload }
+    case SET_ACHIEVEMENT_ERROR:
+      return { ...state, achievementError: action.payload }
     case LOGOUT_USER:
       return { ...initialState }
     default:
