@@ -183,11 +183,7 @@ export const updateAchievement = (
       onSuccess()
     }
 
-    toast.success(
-      `Achievement Updated: ${
-        updateAchievement.name
-      } by ${updateAchievement.artists.map(artist => artist.name).join(', ')}`
-    )
+    toast.success(`Achievement Updated: ${updateAchievement.name} `)
   }
 }
 

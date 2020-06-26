@@ -10,7 +10,6 @@ import CodeNameHeader from 'components/CodeNameHeader/CodeNameHeader'
 import Btn from 'components/Btn/Btn'
 import HList from 'components/HList/HList'
 import VList from 'components/VList/VList'
-import Txt from 'components/Txt/Txt'
 import ModalContainer from 'components/ModalContainer/ModalContainer'
 import AddActionModal from 'components/AddActionModal/AddActionModal'
 import ItemSection from 'components/ItemSection/ItemSection'
@@ -53,7 +52,7 @@ const Actions = ({
     setIsOpen(true)
   }
 
-  if (!Object.keys(action).length) return <Spinner></Spinner>
+  if (action && !Object.keys(action).length) return <Spinner></Spinner>
   return (
     <section className="actionPage">
       <Tier classes="underNav">

@@ -13,9 +13,13 @@ import {
   SET_UPDATING_GENRE_ERROR,
   SET_UPDATING_GENRE_LOADING,
   LOGOUT_USER,
+  SET_GENRE,
+  SET_GENRE_LOADING,
+  SET_GENRE_ERROR,
 } from '../types/actions'
 
 const initialState = {
+  genre: {},
   genreOptions: [],
   genres: [],
   sortValue: 'name:ASC',
@@ -53,6 +57,12 @@ export default (state = initialState, action) => {
       return { ...state, sortValue: action.payload }
     case LOGOUT_USER:
       return { ...initialState }
+    case SET_GENRE:
+      return { ...state, genre: action.payload }
+    case SET_GENRE_LOADING:
+      return { ...state, genreLoading: action.payload }
+    case SET_GENRE_ERROR:
+      return { ...state, genreError: action.payload }
     default:
       return state
   }

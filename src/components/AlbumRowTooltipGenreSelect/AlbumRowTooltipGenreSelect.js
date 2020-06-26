@@ -13,7 +13,7 @@ export default function AlbumRowTooltipGenreSelect({
 }) {
   const [activeGenres, setActiveGenres] = useState(albumGenres)
   const dispatch = useDispatch()
-  const { genreOptions } = useSelector(({ genres: { genreOptions } }) => ({
+  const { genreOptions = [] } = useSelector(({ genres: { genreOptions } }) => ({
     genreOptions,
   }))
   const requestGenresCallback = useCallback(() => dispatch(getAllGenres()), [

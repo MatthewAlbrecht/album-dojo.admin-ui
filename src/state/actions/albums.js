@@ -13,10 +13,13 @@ import {
   SET_DUPLICATES,
   SET_ALBUM_SHOW_DUPLICATES,
   SET_ALBUM_SHOW_INACTIVE,
+  SET_ALBUM,
+  SET_ALBUM_LOADING,
+  SET_ALBUM_ERROR,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
-import { getAlbums, updateAlbum as updateAlbumMutation } from '../gql'
+import { getAlbum, getAlbums, updateAlbum as updateAlbumMutation } from '../gql'
 import { toast } from 'react-toastify'
 
 export const queryAlbums = () => async (dispatch, getState) => {
@@ -218,4 +221,44 @@ export const setDuplicate = id => (dispatch, getState) => {
     duplicates.push(id)
   }
   dispatch({ type: SET_DUPLICATES, payload: duplicates })
+}
+
+export const findAlbum = id => async (dispatch, getState) => {
+  dispatch({ type: SET_ALBUM, payload: [] })
+  dispatch({ type: SET_ALBUM_LOADING, payload: true })
+  dispatch({ type: SET_ALBUM_ERROR, payload: null })
+
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const albumResponse = await client
+    .request(getAlbum, {
+      id,
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_ALBUM_LOADING, payload: false })
+      dispatch({ type: SET_ALBUM_ERROR, payload: error })
+    })
+
+  if (albumResponse) {
+    const { album } = albumResponse
+    dispatch({
+      type: SET_ALBUM,
+      payload: album.albums[0] || {},
+    })
+    dispatch({ type: SET_ALBUM_LOADING, payload: false })
+  }
+}
+
+export const resetAlbum = () => async dispatch => {
+  dispatch({ type: SET_ALBUM, payload: {} })
 }

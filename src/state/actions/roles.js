@@ -11,15 +11,62 @@ import {
   SET_UPDATING_ROLE_LOADING,
   SET_CREATE_ROLE_ERROR,
   SET_CREATE_ROLE_LOADING,
+  SET_ROLE,
+  SET_ROLE_LOADING,
+  SET_ROLE_ERROR,
+  SET_ROLE_OPTIONS_ERROR,
+  SET_ROLE_OPTIONS,
+  SET_ROLE_OPTIONS_LOADING,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
 import {
+  getRole,
   getRoles,
   updateRole as updateRoleMutation,
   createRole as createRoleMutation,
 } from '../gql'
 import { toast } from 'react-toastify'
+
+export const getAllRoles = () => async (dispatch, getState) => {
+  dispatch({ type: SET_ROLE_OPTIONS_ERROR, payload: null })
+  dispatch({ type: SET_ROLE_OPTIONS_LOADING, payload: true })
+  const {
+    session: { token },
+  } = getState()
+
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const roleResponse = await client
+    .request(getRoles, {
+      sort: 'name',
+      sortOrder: 'ASC',
+    })
+    .catch(error => {
+      dispatch({ type: SET_ROLE_OPTIONS_LOADING, payload: false })
+      dispatch({ type: SET_ROLE_OPTIONS_ERROR, payload: error })
+      const errorType = get(error, 'response.errors[0].message')
+      console.log('error ==='.toUpperCase(), error)
+      console.log('errorType ==='.toUpperCase(), errorType)
+    })
+
+  if (roleResponse) {
+    const {
+      role: { roles },
+    } = roleResponse
+    console.log('roles ==='.toUpperCase(), roles)
+    const roleOptions = roles.map(role => ({
+      label: role.name,
+      value: role.id,
+    }))
+    dispatch({ type: SET_ROLE_OPTIONS, payload: roleOptions })
+    dispatch({ type: SET_ROLE_OPTIONS_LOADING, payload: false })
+  }
+}
 
 export const queryRoles = () => async (dispatch, getState) => {
   dispatch({ type: SET_ROLES, payload: [] })
@@ -211,4 +258,44 @@ export const createRole = (role, onSuccess) => async (dispatch, getState) => {
 
     toast.success(`Role Created: ${createRole.name}`)
   }
+}
+
+export const findRole = id => async (dispatch, getState) => {
+  dispatch({ type: SET_ROLE, payload: [] })
+  dispatch({ type: SET_ROLE_LOADING, payload: true })
+  dispatch({ type: SET_ROLE_ERROR, payload: null })
+
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const roleResponse = await client
+    .request(getRole, {
+      id,
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_ROLE_LOADING, payload: false })
+      dispatch({ type: SET_ROLE_ERROR, payload: error })
+    })
+
+  if (roleResponse) {
+    const { role } = roleResponse
+    dispatch({
+      type: SET_ROLE,
+      payload: role.roles[0] || {},
+    })
+    dispatch({ type: SET_ROLE_LOADING, payload: false })
+  }
+}
+
+export const resetRole = () => async dispatch => {
+  dispatch({ type: SET_ROLE, payload: {} })
 }

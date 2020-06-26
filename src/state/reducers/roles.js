@@ -12,9 +12,16 @@ import {
   SET_CREATE_ROLE_ERROR,
   SET_CREATE_ROLE_LOADING,
   LOGOUT_USER,
+  SET_ROLE,
+  SET_ROLE_LOADING,
+  SET_ROLE_ERROR,
+  SET_ROLE_OPTIONS,
+  SET_ROLE_OPTIONS_ERROR,
+  SET_ROLE_OPTIONS_LOADING,
 } from '../types/actions'
 
 const initialState = {
+  role: {},
   roles: [],
   sortValue: 'name:ASC',
   sortUpdated: false,
@@ -49,6 +56,18 @@ export default (state = initialState, action) => {
       return { ...state, sortValue: action.payload }
     case LOGOUT_USER:
       return { ...initialState }
+    case SET_ROLE:
+      return { ...state, role: action.payload }
+    case SET_ROLE_LOADING:
+      return { ...state, roleLoading: action.payload }
+    case SET_ROLE_ERROR:
+      return { ...state, roleError: action.payload }
+    case SET_ROLE_OPTIONS:
+      return { ...state, roleOptions: action.payload }
+    case SET_ROLE_OPTIONS_ERROR:
+      return { ...state, roleOptionsError: action.payload }
+    case SET_ROLE_OPTIONS_LOADING:
+      return { ...state, roleOptionsLoading: action.payload }
     default:
       return state
   }

@@ -34,6 +34,26 @@ export const getAlbums = print(gql`
   }
 `)
 
+export const getAlbum = print(gql`
+  query getAlbum($id: ID!) {
+    album(pageSize: 1, id: $id) {
+      hasMore
+      cursor
+      totalCount
+      albums {
+        id
+        name
+        artists
+        images
+        spotifyId
+        genres {
+          id
+        }
+      }
+    }
+  }
+`)
+
 export const updateAlbum = print(gql`
   mutation updateAlbum($album: AlbumInputTypeUpdate!) {
     updateAlbum(album: $album) {

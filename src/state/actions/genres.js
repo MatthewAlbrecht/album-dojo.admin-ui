@@ -14,10 +14,14 @@ import {
   SET_UPDATING_GENRE_LOADING,
   SET_CREATE_GENRE_ERROR,
   SET_CREATE_GENRE_LOADING,
+  SET_GENRE,
+  SET_GENRE_LOADING,
+  SET_GENRE_ERROR,
 } from '../types/actions'
 import { GraphQLClient } from 'graphql-request'
 import get from 'lodash.get'
 import {
+  getGenre,
   getGenres,
   updateGenre as updateGenreMutation,
   createGenre as createGenreMutation,
@@ -167,7 +171,7 @@ export const onSortUpdate = e => dispatch => {
   dispatch({ type: SET_GENRE_QUERY_UPDATED, payload: true })
 }
 
-export const updateGenre = (code, updatedProperties = {}, onSuccess) => async (
+export const updateGenre = (id, updatedProperties = {}, onSuccess) => async (
   dispatch,
   getState
 ) => {
@@ -181,11 +185,11 @@ export const updateGenre = (code, updatedProperties = {}, onSuccess) => async (
       Authorization: `Bearer ${token}`,
     },
   })
-
+  console.log('id ==='.toUpperCase(), id)
   const updateGenreResponse = await client
     .request(updateGenreMutation, {
       genre: {
-        code,
+        id,
         ...updatedProperties,
       },
     })
@@ -202,7 +206,7 @@ export const updateGenre = (code, updatedProperties = {}, onSuccess) => async (
     let genres = [...getState().genres.genres]
 
     genres = genres.map(genre =>
-      genre.code === updateGenre.code ? updateGenre : genre
+      genre.id === updateGenre.id ? updateGenre : genre
     )
 
     dispatch({ type: SET_GENRES, payload: genres })
@@ -253,4 +257,44 @@ export const createGenre = (genre, onSuccess) => async (dispatch, getState) => {
 
     toast.success(`Genre Created: ${createGenre.name}`)
   }
+}
+
+export const findGenre = id => async (dispatch, getState) => {
+  dispatch({ type: SET_GENRE, payload: [] })
+  dispatch({ type: SET_GENRE_LOADING, payload: true })
+  dispatch({ type: SET_GENRE_ERROR, payload: null })
+
+  const {
+    session: { token },
+  } = getState()
+  const client = new GraphQLClient('http://localhost:2017/graphql', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  const genreResponse = await client
+    .request(getGenre, {
+      id,
+    })
+    .catch(error => {
+      const errorType = get(error, 'response.errors[0].message')
+      console.error('error ==='.toUpperCase(), error)
+      console.error('errorType ==='.toUpperCase(), errorType)
+      dispatch({ type: SET_GENRE_LOADING, payload: false })
+      dispatch({ type: SET_GENRE_ERROR, payload: error })
+    })
+
+  if (genreResponse) {
+    const { genre } = genreResponse
+    dispatch({
+      type: SET_GENRE,
+      payload: genre.genres[0] || {},
+    })
+    dispatch({ type: SET_GENRE_LOADING, payload: false })
+  }
+}
+
+export const resetGenre = () => async dispatch => {
+  dispatch({ type: SET_GENRE, payload: {} })
 }

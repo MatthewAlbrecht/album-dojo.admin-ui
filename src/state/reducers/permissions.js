@@ -12,9 +12,16 @@ import {
   SET_CREATE_PERMISSION_ERROR,
   SET_CREATE_PERMISSION_LOADING,
   LOGOUT_USER,
+  SET_PERMISSION,
+  SET_PERMISSION_LOADING,
+  SET_PERMISSION_ERROR,
+  SET_PERMISSION_OPTIONS,
+  SET_PERMISSION_OPTIONS_ERROR,
+  SET_PERMISSION_OPTIONS_LOADING,
 } from '../types/actions'
 
 const initialState = {
+  permission: {},
   permissions: [],
   sortValue: 'name:ASC',
   sortUpdated: false,
@@ -50,6 +57,18 @@ export default (state = initialState, action) => {
       return { ...state, sortValue: action.payload }
     case LOGOUT_USER:
       return { ...initialState }
+    case SET_PERMISSION:
+      return { ...state, permission: action.payload }
+    case SET_PERMISSION_LOADING:
+      return { ...state, permissionLoading: action.payload }
+    case SET_PERMISSION_ERROR:
+      return { ...state, permissionError: action.payload }
+    case SET_PERMISSION_OPTIONS:
+      return { ...state, permissionOptions: action.payload }
+    case SET_PERMISSION_OPTIONS_ERROR:
+      return { ...state, permissionOptionsError: action.payload }
+    case SET_PERMISSION_OPTIONS_LOADING:
+      return { ...state, permissionOptionsLoading: action.payload }
     default:
       return state
   }

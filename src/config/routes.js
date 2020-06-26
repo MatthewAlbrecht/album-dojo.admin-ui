@@ -1,15 +1,18 @@
+import Achievement from 'pages/Achievement/Achievement'
+import Achievements from 'pages/Achievements/Achievements'
+import Action from 'pages/Action/Action'
+import Actions from 'pages/Actions/Actions'
+import Albums from 'pages/Albums/Albums'
+import Genre from 'pages/Genre/Genre'
+import Genres from 'pages/Genres/Genres'
 import Home from 'pages/Home/Home'
 import Login from 'pages/Login/Login'
-import Spotify from 'pages/Spotify/Spotify'
-import Albums from 'pages/Albums/Albums'
-import Users from 'pages/Users/Users'
-import Genres from 'pages/Genres/Genres'
-import Roles from 'pages/Roles/Roles'
 import Permissions from 'pages/Permissions/Permissions'
-import Achievements from 'pages/Achievements/Achievements'
-import Achievement from 'pages/Achievement/Achievement'
-import Actions from 'pages/Actions/Actions'
-import Action from 'pages/Action/Action'
+import Permission from 'pages/Permission/Permission'
+import Roles from 'pages/Roles/Roles'
+import Role from 'pages/Role/Role'
+import Spotify from 'pages/Spotify/Spotify'
+import Users from 'pages/Users/Users'
 
 export const publicRoutes = [
   {
@@ -45,13 +48,28 @@ export const privateRoutes = [
     exact: true,
   },
   {
+    path: '/genres/:id',
+    component: Genre,
+    exact: true,
+  },
+  {
     path: '/roles',
     component: Roles,
     exact: true,
   },
   {
+    path: '/roles/:id',
+    component: Role,
+    exact: true,
+  },
+  {
     path: '/permissions',
     component: Permissions,
+    exact: true,
+  },
+  {
+    path: '/permissions/:id',
+    component: Permission,
     exact: true,
   },
   {

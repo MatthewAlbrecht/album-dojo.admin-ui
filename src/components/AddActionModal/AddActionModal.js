@@ -54,7 +54,13 @@ export default function AddActionModal({
               pattern="[A-Z]{2}\d{3}"
               defaultValue={defaultValues.code}
             />
-            <TextInput name="name" label="Name" id="action-name" required />
+            <TextInput
+              name="name"
+              label="Name"
+              id="action-name"
+              required
+              defaultValue={defaultValues.name}
+            />
             <TextBox
               name="description"
               label="Description"

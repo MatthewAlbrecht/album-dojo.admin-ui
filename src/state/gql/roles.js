@@ -27,6 +27,27 @@ export const getRoles = print(gql`
   }
 `)
 
+export const getRole = print(gql`
+  query getRole($id: ID!) {
+    role(pageSize: 1, id: $id) {
+      hasMore
+      cursor
+      totalCount
+      roles {
+        id
+        name
+        description
+        permissions {
+          permission {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+`)
+
 export const updateRole = print(gql`
   mutation updateRole($role: RoleInputTypeUpdate!) {
     updateRole(role: $role) {

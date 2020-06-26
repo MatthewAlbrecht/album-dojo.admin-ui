@@ -57,7 +57,6 @@ export default (state = initialState, action) => {
       return { ...state, actionLoading: action.payload }
     case SET_ACTION_ERROR:
       return { ...state, actionError: action.payload }
-
     case LOGOUT_USER:
       return { ...initialState }
     default:

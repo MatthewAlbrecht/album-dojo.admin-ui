@@ -26,6 +26,24 @@ export const getGenres = print(gql`
   }
 `)
 
+export const getGenre = print(gql`
+  query getGenre($id: ID!) {
+    genre(pageSize: 1, id: $id) {
+      hasMore
+      cursor
+      totalCount
+      genres {
+        id
+        name
+        parentGenreId
+        parentGenre {
+          name
+        }
+      }
+    }
+  }
+`)
+
 export const updateGenre = print(gql`
   mutation updateGenre($genre: GenreInputTypeUpdate!) {
     updateGenre(genre: $genre) {

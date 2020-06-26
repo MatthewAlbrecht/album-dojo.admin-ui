@@ -28,6 +28,22 @@ export const getUsers = print(gql`
   }
 `)
 
+export const getUser = print(gql`
+  query getUser($id: ID!) {
+    user(pageSize: 1, id: $id) {
+      hasMore
+      cursor
+      totalCount
+      users {
+        id
+        email
+        spotifyId
+        username
+      }
+    }
+  }
+`)
+
 export const updateUser = print(gql`
   mutation updateUser($user: UserInputTypeUpdate!) {
     updateUser(user: $user) {

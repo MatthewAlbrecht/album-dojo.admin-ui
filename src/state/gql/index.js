@@ -1,6 +1,6 @@
 export { loginUserMutation } from './authentication'
 export { addAlbumByIdMutation, addAlbumsByPlaylistMutation } from './spotify'
-export { getAlbums, updateAlbum } from './albums'
+export { getAlbum, getAlbums, updateAlbum } from './albums'
 export {
   getAchievement,
   getAchievements,
@@ -8,11 +8,12 @@ export {
   createAchievement,
 } from './achievements'
 export { getAction, getActions, updateAction, createAction } from './actions'
-export { getGenres, updateGenre, createGenre } from './genres'
+export { getGenre, getGenres, updateGenre, createGenre } from './genres'
 export {
+  getPermission,
   getPermissions,
   updatePermission,
   createPermission,
 } from './permissions'
-export { getRoles, updateRole, createRole } from './roles'
-export { getUsers, updateUser, createUser } from './users'
+export { getRole, getRoles, updateRole, createRole } from './roles'
+export { getUser, getUsers, updateUser, createUser } from './users'

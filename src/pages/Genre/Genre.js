@@ -1,46 +1,44 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { findAchievement, resetAchievement } from 'state/actions/achievements'
+import { findGenre, resetGenre } from 'state/actions/genres'
 import Container from 'components/Container/Container'
 import Tier from 'components/Tier/Tier'
 import Box from 'components/Box/Box'
 import Spinner from 'components/Spinner/Spinner'
-import CodeNameHeader from 'components/CodeNameHeader/CodeNameHeader'
+import Txt from 'components/Txt/Txt'
 import Btn from 'components/Btn/Btn'
 import HList from 'components/HList/HList'
 import VList from 'components/VList/VList'
+import Hr from 'components/Hr/Hr'
 import ModalContainer from 'components/ModalContainer/ModalContainer'
-import RelatedAction from 'components/RelatedAction/RelatedAction'
-import AddAchievementModal from 'components/AddAchievementModal/AddAchievementModal'
+import AddGenreModal from 'components/AddGenreModal/AddGenreModal'
 import ItemSection from 'components/ItemSection/ItemSection'
 import KeyValueItem from 'components/KeyValueItem/KeyValueItem'
-import SimilarAchievements from 'components/SimilarAchievements/SimilarAchievements'
 
-const Achievements = ({
+const Genres = ({
   match: {
-    params: { code },
+    params: { id },
   },
 }) => {
   const dispatch = useDispatch()
   const [modalIsOpen, setIsOpen] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
 
-  const requestAchievementCallback = useCallback(
-    () => dispatch(findAchievement(code)),
-    [dispatch, code]
-  )
-  const resetAchievementCallback = useCallback(
-    () => dispatch(resetAchievement()),
-    [dispatch]
-  )
+  const requestGenreCallback = useCallback(() => dispatch(findGenre(id)), [
+    dispatch,
+    id,
+  ])
+  const resetGenreCallback = useCallback(() => dispatch(resetGenre()), [
+    dispatch,
+  ])
 
   useEffect(() => {
-    requestAchievementCallback()
-    return () => resetAchievementCallback()
-  }, [requestAchievementCallback, resetAchievementCallback])
-  const { achievement } = useSelector(({ achievements: { achievement } }) => ({
-    achievement,
+    requestGenreCallback()
+    return () => resetGenreCallback()
+  }, [requestGenreCallback, resetGenreCallback])
+  const { genre } = useSelector(({ genres: { genre } }) => ({
+    genre,
   }))
 
   const handleEditClick = () => {
@@ -53,19 +51,33 @@ const Achievements = ({
     setIsOpen(true)
   }
 
-  if (achievement && !Object.keys(achievement).length)
-    return <Spinner></Spinner>
+  if (genre && !Object.keys(genre).length) return <Spinner></Spinner>
   return (
-    <section className="achievementPage">
+    <section className="genrePage">
       <Tier classes="underNav">
         <Container>
           <Box classes="bottom3">
-            <CodeNameHeader
-              name={achievement.name}
-              code={achievement.code}
-              type="Achievement"
-              image
+            <Box classes="bottom0_5">
+              <Txt
+                tag="span"
+                size="14"
+                semibold
+                color="Grey"
+                content="Genre"
+                uppercase
+                space="2"
+              />
+            </Box>
+            <Txt
+              tag="h1"
+              size="24"
+              semibold
+              color="DefaultCopy"
+              content={genre.name}
             />
+            <Box classes="top2">
+              <Hr color="GreyLightest"></Hr>
+            </Box>
           </Box>
           <Box classes="bottom5">
             <div className="display_flex flexJustifier_flexStart">
@@ -86,37 +98,26 @@ const Achievements = ({
             </div>
           </Box>
           <VList classes="5">
-            <ItemSection heading="Achievement Details">
+            <ItemSection heading="Genre Details">
               <HList classes="3">
-                <KeyValueItem property="Level" value={achievement.level} />
                 <KeyValueItem
-                  property="Description"
-                  value={achievement.description}
+                  property="Parent Genre"
+                  value={(genre.parentGenre && genre.parentGenre.name) || '—'}
                 />
               </HList>
             </ItemSection>
-            <ItemSection heading="Similar Achievements">
-              <SimilarAchievements
-                achievements={achievement.relatedAchievements}
-              />
-            </ItemSection>
-            {achievement.relatedAction && (
-              <ItemSection heading="Related Action">
-                <RelatedAction action={achievement.relatedAction} />
-              </ItemSection>
-            )}
           </VList>
         </Container>
       </Tier>
       <ModalContainer modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}>
-        <AddAchievementModal
+        <AddGenreModal
           isEdit={isEdit}
-          defaultValues={achievement}
+          defaultValues={genre}
           setIsOpen={setIsOpen}
-        ></AddAchievementModal>
+        ></AddGenreModal>
       </ModalContainer>
     </section>
   )
 }
 
-export default Achievements
+export default Genres

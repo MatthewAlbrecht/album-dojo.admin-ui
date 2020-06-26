@@ -14,9 +14,13 @@ import {
   SET_ALBUM_SHOW_DUPLICATES,
   SET_ALBUM_SHOW_INACTIVE,
   LOGOUT_USER,
+  SET_ALBUM,
+  SET_ALBUM_LOADING,
+  SET_ALBUM_ERROR,
 } from '../types/actions'
 
 const initialState = {
+  album: {},
   albums: [],
   sortValue: 'createdAt:DESC',
   sortUpdated: false,
@@ -58,6 +62,12 @@ export default (state = initialState, action) => {
       return { ...state, sortValue: action.payload }
     case LOGOUT_USER:
       return { ...initialState }
+    case SET_ALBUM:
+      return { ...state, album: action.payload }
+    case SET_ALBUM_LOADING:
+      return { ...state, albumLoading: action.payload }
+    case SET_ALBUM_ERROR:
+      return { ...state, albumError: action.payload }
     default:
       return state
   }
